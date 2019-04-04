@@ -3,36 +3,34 @@
     ViewData["Title"] = "Sign In";
 }
 
-<h2>Registration</h2>
+<h2>Регистрация нового пользователя</h2>
 
 <div class="col-md-6">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">
-                Please sign up
-            </h3>
+            <h4 class="panel-title">
+                Пожалуйста, введите свои данные
+            </h4>
         </div>
         <div class="panel-body">
-            <form role="form" asp-action="Register" asp-controller="Users" method="post">
-                <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="text" name="Name" class="form-control input-sm" placeholder="First Name">
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="text" name="Surname" class="form-control input-sm" placeholder="Last Name">
-                        </div>
-                    </div>
+            <form role="form" asp-action="" asp-controller="" method="">
+                <div class="form-group">
+                    <label for="name">Имя:</label>
+                    <input type="text" name="Name" class="form-control input-sm" placeholder="Ваше имя">
                 </div>
                 <div class="form-group">
-                    <input type="email" name="Email" class="form-control input-sm" placeholder="Email Address">
+                    <label for="name">Фамилия:</label>
+                    <input type="text" name="Surname" class="form-control input-sm" placeholder="Ваша фамилия">
                 </div>
                 <div class="form-group">
-                    <input type="password" name="Password" class="form-control input-sm" placeholder="Password">
+                    <label for="email">Электронная почта:</label>
+                    <input type="text" name="Email" class="form-control input-sm" placeholder="example@mail.com">
                 </div>
-                <input type="submit" value="Register" class="btn btn-info btn-block">
+                <div class="form-group">
+                    <label for="pwd">Пароль:</label>
+                    <input type="text" name="Password" class="form-control input-sm" placeholder="Введите пароль">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
