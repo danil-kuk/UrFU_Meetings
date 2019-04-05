@@ -18,7 +18,7 @@ namespace WebApp.Controllers
             _context = context;
         }
 
-        public IActionResult SignInIndex()
+        public IActionResult Index()
         {
             return View();
         }
