@@ -1,38 +1,36 @@
-﻿
+﻿@model WebApp.Models.DataModels.Entities.User
 @{
     ViewData["Title"] = "Sign In";
 }
-
 <h2>Регистрация нового пользователя</h2>
 
 <div class="col-md-6">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                Пожалуйста, введите свои данные
-            </h4>
-        </div>
-        <div class="panel-body">
-            <form role="form" asp-action="Register" asp-controller="SignIn">
-                <div class="form-group">
-                    <label for="name">Имя:</label>
-                    <input type="text" name="Name" class="form-control input-sm" placeholder="Ваше имя">
-                </div>
-                <div class="form-group">
-                    <label for="name">Фамилия:</label>
-                    <input type="text" name="Surname" class="form-control input-sm" placeholder="Ваша фамилия">
-                </div>
-                <div class="form-group">
-                    <label for="email">Электронная почта:</label>
-                    <input type="text" name="Email" class="form-control input-sm" placeholder="example@mail.com">
-                </div>
-                <div class="form-group">
-                    <label for="pwd">Пароль:</label>
-                    <input type="text" name="Password" class="form-control input-sm" placeholder="Введите пароль">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
-    </div>
+    <form role="form" asp-action="Register" asp-controller="SignIn">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name)
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Surname)
+                @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
+                @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email)
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password)
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+            </div>
+            <input type="submit" value="Sign In" class="btn btn-primary" />
+        }
+    </form>
 </div>
-
