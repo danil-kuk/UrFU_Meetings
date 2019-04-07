@@ -9,14 +9,14 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
+            @Html.ValidationSummary(true, "Не удалось создать аккаунт, попробуйте снова")
             <div class="form-group">
-                @Html.LabelFor(model => model.Name)
+                <label>Имя: </label>
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Surname)
+                <label>Фамилия: </label>
                 @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
                 @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
             </div>
@@ -26,11 +26,11 @@
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Password)
+                <label>Пароль: </label>
                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
-            <input type="submit" value="Sign In" class="btn btn-primary" />
+            <input type="submit" value="Регистрация" class="btn btn-primary" />
         }
     </form>
 </div>
