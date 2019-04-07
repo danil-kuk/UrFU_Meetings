@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models.DataModels;
 using WebApp.Models.DataModels.Entities;
+using WebApp.Services;
 
 namespace WebApp.Controllers
 {
     public class SignInController : Controller
     {
-        private readonly EFDBContext _context;
+        private readonly IUserService _userService;
 
-        public SignInController(EFDBContext context)
+        public SignInController(IUserService userService)
         {
-            _context = context;
+            _userService = userService;
         }
 
         public IActionResult Index()
@@ -35,30 +36,15 @@ namespace WebApp.Controllers
                     Email = model.Email,
                     Password = model.Password
                 };
-                _context.Users.Add(user);
-                _context.SaveChanges();
-            }
-            else
-            {
-                TempDataMessage("message", "danger", $"Register form datas is not valid");
-                return RedirectToAction("Index", "Home");
+                _userService.InsertUser(user);
             }
             return RedirectToAction("Index", "Home");
         }
 
-        public void TempDataMessage(string key, string alert, string value)
+        [HttpPost]
+        public JsonResult EmailCheck(string Email)
         {
-            try
-            {
-                TempData.Remove(key);
-                TempData.Add(key, value);
-                TempData.Add("alertType", alert);
-            }
-            catch
-            {
-                Debug.WriteLine("TempDataMessage Error");
-            }
-
+            return Json(_userService.GetByFilter(i => i.Email == Email) == null);
         }
     }
 }

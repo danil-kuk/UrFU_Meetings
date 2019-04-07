@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApp.Models.DataModels;
+using WebApp.Services;
 
 namespace WebApp
 {
@@ -29,6 +30,9 @@ namespace WebApp
             //Регистрация контекста базы данных, строка подключения находится в appsettings.json
             services.AddDbContext<EFDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+            services.AddScoped<IUserService, UserService>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
