@@ -12,9 +12,11 @@ namespace WebApp.Models.DataModels.Entities
         public int UserId { get; set; }
 
         [Required(ErrorMessage = "Введите имя")]
+        [RegularExpression(@"^[а-яА-Я]+$", ErrorMessage = "Имя должно состоять только из русских букв")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Введите фамилию")]
+        [RegularExpression(@"^[а-яА-Я]+$", ErrorMessage = "Фамилия должна состоять только из русских букв")]
         public string Surname { get; set; }
 
         [Required]
