@@ -31,8 +31,8 @@ namespace WebApp.Controllers
             {
                 User user = new User
                 {
-                    Name = model.Name,
-                    Surname = model.Surname,
+                    Name = char.ToUpper(model.Name[0]) + model.Name.Substring(1).ToLower(),
+                    Surname = char.ToUpper(model.Surname[0]) + model.Surname.Substring(1).ToLower(),
                     Email = model.Email,
                     Password = model.Password
                 };
