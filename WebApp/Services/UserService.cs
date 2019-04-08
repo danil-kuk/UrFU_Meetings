@@ -9,36 +9,36 @@ namespace WebApp.Services
 {
     public class UserService : IUserService
     {
-        private readonly IRepositoryBase<User> _repositoryUser;
+        private readonly IUserDataBase<User> _databaseUser;
 
-        public UserService(IRepositoryBase<User> repositoryUser)
+        public UserService(IUserDataBase<User> databaseUser)
         {
-            _repositoryUser = repositoryUser;
+            _databaseUser = databaseUser;
         }
 
         public void DeleteUser(User user)
         {
-            _repositoryUser.Remove(user);
+            _databaseUser.Remove(user);
         }
 
         public User GetByFilter(Expression<Func<User, bool>> filter)
         {
-            return _repositoryUser.GetByFilter(filter);
+            return _databaseUser.GetByFilter(filter);
         }
 
         public User GetById(int id)
         {
-            return _repositoryUser.GetById(id);
+            return _databaseUser.GetById(id);
         }
 
         public void InsertUser(User user)
         {
-            _repositoryUser.Insert(user);
+            _databaseUser.Insert(user);
         }
 
         public void UpdateUser(User user)
         {
-            _repositoryUser.Update(user);
+            _databaseUser.Update(user);
         }
     }
 }
