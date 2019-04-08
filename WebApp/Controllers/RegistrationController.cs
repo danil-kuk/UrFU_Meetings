@@ -10,11 +10,11 @@ using WebApp.Services;
 
 namespace WebApp.Controllers
 {
-    public class SignInController : Controller
+    public class RegistrationController : Controller
     {
         private readonly IUserService _userService;
 
-        public SignInController(IUserService userService)
+        public RegistrationController(IUserService userService)
         {
             _userService = userService;
         }
