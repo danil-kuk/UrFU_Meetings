@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Helpers;
 using WebApp.Models.DataModels;
 using WebApp.Models.DataModels.Entities;
 using WebApp.Services;
@@ -34,7 +35,7 @@ namespace WebApp.Controllers
                     Name = char.ToUpper(model.Name[0]) + model.Name.Substring(1).ToLower(),
                     Surname = char.ToUpper(model.Surname[0]) + model.Surname.Substring(1).ToLower(),
                     Email = model.Email,
-                    Password = model.Password
+                    Password = new PasswordEncode().Encoder(model.Password), // SHA256
                 };
                 _userService.InsertUser(user);
             }
