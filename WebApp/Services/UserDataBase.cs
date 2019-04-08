@@ -8,12 +8,12 @@ using WebApp.Models.DataModels;
 
 namespace WebApp.Services
 {
-    public class RepositoryBase<T> : IRepositoryBase<T> where T : class, new()
+    public class UserDataBase<T> : IUserDataBase<T> where T : class, new()
     {
         private readonly EFDBContext _context;
         private readonly DbSet<T> _entities;
 
-        public RepositoryBase(EFDBContext context)
+        public UserDataBase(EFDBContext context)
         {
             _context = context;
             _entities = context.Set<T>();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApp.Services
 {
-    public interface IRepositoryBase<T>
+    public interface IUserDataBase<T>
     {
         IEnumerable<T> GetAll();
         T GetById(int id);

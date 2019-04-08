@@ -32,7 +32,7 @@ namespace WebApp
             services.AddDbContext<EFDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+            services.AddScoped(typeof(IUserDataBase<>), typeof(UserDataBase<>));
             services.AddScoped<IUserService, UserService>();
 
             services.Configure<CookiePolicyOptions>(options =>
@@ -44,7 +44,7 @@ namespace WebApp
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => //CookieAuthenticationOptions
                 {
-                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    options.LoginPath = new PathString("/Account/Login");
                 });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
