@@ -18,10 +18,12 @@ namespace WebApp.Models.DataModels.Entities
         public string Surname { get; set; }
 
         [Required(ErrorMessage = "Введите Email")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Введите Email")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Неверный формат")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Введите пароль")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
     }
 }

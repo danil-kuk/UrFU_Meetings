@@ -19,7 +19,8 @@ namespace WebApp.Models.ViewModels
         public string Surname { get; set; }
 
         [Required(ErrorMessage = "Введите Email")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Введите Email")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Неверный формат")]
         [Remote("EmailCheck", "Registration", HttpMethod = "Post", ErrorMessage = "Такая почта уже зарегистрирована, используйте другую")]
         public string Email { get; set; }
 
