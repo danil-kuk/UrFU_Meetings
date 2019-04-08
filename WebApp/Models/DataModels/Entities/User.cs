@@ -19,9 +19,9 @@ namespace WebApp.Models.DataModels.Entities
         [RegularExpression(@"^[а-яА-Я]+$", ErrorMessage = "Фамилия должна состоять только из русских букв")]
         public string Surname { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите Email")]
         [DataType(DataType.EmailAddress, ErrorMessage = "Введите Email")]
-        [Remote("EmailCheck", "SignIn", HttpMethod = "Post", ErrorMessage = "Такая почта уже зарегистрирована, используйте другую")]
+        [Remote("EmailCheck", "Registration", HttpMethod = "Post", ErrorMessage = "Такая почта уже зарегистрирована, используйте другую")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Введите пароль")]
