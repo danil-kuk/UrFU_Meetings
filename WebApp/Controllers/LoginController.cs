@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Helpers;
 using WebApp.Models.DataModels.Entities;
 using WebApp.Models.ViewModels;
 using WebApp.Services;
@@ -32,7 +33,7 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = _userService.GetByFilter(i => i.Email == model.Email && i.Password == model.Password);
+                User user = _userService.GetByFilter(i => i.Email == model.Email && i.Password == new PasswordEncode().Encoder(model.Password));
                 if (user == null)
                 {
                     ModelState.AddModelError("Email", "Проверьте правильность введеной электронной почты");
