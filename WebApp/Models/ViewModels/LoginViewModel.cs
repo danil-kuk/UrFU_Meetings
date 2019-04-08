@@ -8,11 +8,12 @@ namespace WebApp.Models.ViewModels
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Введите Email")]
         [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Неверный формат")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите пароль")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }
