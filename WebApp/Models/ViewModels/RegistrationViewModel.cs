@@ -29,5 +29,11 @@ namespace WebApp.Models.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+
+        [Required(ErrorMessage = "Подтвердите пароль")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        [Compare("Password", ErrorMessage = "Пароли отличаются")]
+        public string ConfirmPassword { get; set; }
     }
 }
