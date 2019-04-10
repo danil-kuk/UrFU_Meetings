@@ -38,7 +38,7 @@ namespace WebApp.Controllers
                     Password = new PasswordEncode().Encoder(model.Password) // SHA256
                 };
                 _userService.InsertUser(user);
-                return RedirectToAction("", "Login");
+                //return RedirectToAction("", "Login");
             }
             return RedirectToAction("Index", "Home");
         }
@@ -46,7 +46,7 @@ namespace WebApp.Controllers
         [HttpPost]
         public JsonResult EmailCheck(string Email)
         {
-            return Json(_userService.GetByFilter(i => i.Email == Email) == null);
+            return Json(_userService.GetByFilter(i => i.Email == Email) == null || Email == User.Identity.Name);
         }
     }
 }
