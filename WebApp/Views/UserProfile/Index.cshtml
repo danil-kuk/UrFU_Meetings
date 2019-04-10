@@ -10,6 +10,9 @@
                 <li class="nav-item">
                     <a href="" data-target="#edit" data-toggle="tab" class="nav-link active">Информация</a>
                 </li>
+                <li class="nav-item">
+                    <a href="" data-target="#delete" data-toggle="tab" class="nav-link">Дополнительно</a>
+                </li>
             </ul>
             <div class="tab-content py-4">
                 <div class="tab-pane active" id="edit">
@@ -35,7 +38,7 @@
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control",  } })
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", } })
                                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -63,14 +66,10 @@
                         }
                     </form>
                 </div>
-            </div>
-        </div>
-        <div class="col-lg-4 order-lg-1 text-center">
-            <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-            <h6 class="mt-2">Загрузите новое фото</h6>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="customFile">
-                <label class="custom-file-label" for="customFile">Выберите файл</label>
+                <div class="tab-pane" id="delete">
+                    <h6>Для удаления аккаунта нажмите на кнопку: </h6>
+                    <a asp-action="DeleteUser" asp-controller="UserProfile" class="btn btn-danger" role="button">Удалить аккаунт</a>
+                </div>
             </div>
         </div>
     </div>
