@@ -35,9 +35,10 @@ namespace WebApp.Controllers
                     Name = char.ToUpper(model.Name[0]) + model.Name.Substring(1).ToLower(),
                     Surname = char.ToUpper(model.Surname[0]) + model.Surname.Substring(1).ToLower(),
                     Email = model.Email,
-                    Password = new PasswordEncode().Encoder(model.Password), // SHA256
+                    Password = new PasswordEncode().Encoder(model.Password) // SHA256
                 };
                 _userService.InsertUser(user);
+                return RedirectToAction("", "Login");
             }
             return RedirectToAction("Index", "Home");
         }

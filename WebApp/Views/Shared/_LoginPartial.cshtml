@@ -1,8 +1,8 @@
-﻿
+﻿@model WebApp.Models.ViewModels.UserProfileViewModel
 @if (User.Identity.IsAuthenticated)
 {
     <ul class="nav navbar-nav">
-        <li class="nav-item">@Html.ActionLink($"Здравствуйте, {User.Identity.Name}", "Index", "TODO", routeValues: null, htmlAttributes: new { id = "accountLink", @class = "nav-link" })</li>
+        <li class="nav-item">@Html.ActionLink($"{Model.Name} {Model.Surname}", "Index", "UserProfile", routeValues: null, htmlAttributes: new { id = "accountLink", @class = "nav-link" })</li>
         <li class="nav-item">@Html.ActionLink("Выход", "Logout", "Login", routeValues: null, htmlAttributes: new { id = "logoutLink", @class = "nav-link" })</li>
     </ul>
 }

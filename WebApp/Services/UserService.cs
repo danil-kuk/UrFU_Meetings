@@ -36,9 +36,9 @@ namespace WebApp.Services
             _databaseUser.Insert(user);
         }
 
-        public void UpdateUser(User user)
+        public void UpdateUser()
         {
-            _databaseUser.Update(user);
+            _databaseUser.Update();
         }
     }
 }

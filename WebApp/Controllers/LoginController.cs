@@ -42,7 +42,7 @@ namespace WebApp.Controllers
                 }
                 else
                 {
-                    await Authenticate(user.Name);
+                    await Authenticate(user.Email);
                 }
             }
             return RedirectToAction("Index", "Home");
