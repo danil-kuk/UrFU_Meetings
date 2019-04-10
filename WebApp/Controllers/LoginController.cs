@@ -38,7 +38,7 @@ namespace WebApp.Controllers
                 {
                     ModelState.AddModelError("Email", "Проверьте правильность введеной электронной почты");
                     ModelState.AddModelError("Password", "Проверьте правильность введеного пароля");
-                    return View("Index", model);
+                    return View("Index");
                 }
                 else
                 {
