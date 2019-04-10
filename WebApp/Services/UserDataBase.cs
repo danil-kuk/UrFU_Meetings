@@ -64,13 +64,8 @@ namespace WebApp.Services
             SaveChanges();
         }
 
-        public void Update(T entity)
+        public void Update()
         {
-            if (entity == null)
-            {
-                throw new ArgumentNullException("entity");
-            }
-            _entities.Update(entity);
             SaveChanges();
         }
 

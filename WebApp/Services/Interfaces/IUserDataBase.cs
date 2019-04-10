@@ -15,6 +15,6 @@ namespace WebApp.Services
         int GetCount(Expression<Func<T, bool>> filter);
         void Insert(T entity);
         void Remove(T entity);
-        void Update(T entity);
+        void Update();
     }
 }

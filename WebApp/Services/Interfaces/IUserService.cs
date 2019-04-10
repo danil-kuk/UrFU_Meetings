@@ -12,7 +12,7 @@ namespace WebApp.Services
         User GetById(int id);
         User GetByFilter(Expression<Func<User, bool>> filter);
         void InsertUser(User user);
-        void UpdateUser(User user);
+        void UpdateUser();
         void DeleteUser(User user);
     }
 }
