@@ -35,6 +35,15 @@ namespace WebApp.Controllers
             });
         }
 
+        [Authorize]
+        public IActionResult DeleteUser()
+        {
+            User user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
+            _userService.DeleteUser(user);
+            ForceLogout();
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpPost]
         [Authorize]
         public IActionResult ChangeUserData(User model)
@@ -55,9 +64,14 @@ namespace WebApp.Controllers
             _userService.UpdateUser();
         }
 
-        private async void ChangeEmail(string userName)
+        private async void ForceLogout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+
+        private async void ChangeEmail(string userName)
+        {
+            ForceLogout();
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
