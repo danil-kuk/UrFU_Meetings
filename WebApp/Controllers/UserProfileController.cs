@@ -61,7 +61,7 @@ namespace WebApp.Controllers
             oldData.Email = newData.Email;
             oldData.Password = new PasswordEncode().Encoder(newData.Password);
             ChangeEmail(oldData.Email);
-            _userService.UpdateUser();
+            _userService.UpdateUserData();
         }
 
         private async void ForceLogout()

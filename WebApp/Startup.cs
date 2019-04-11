@@ -38,6 +38,8 @@ namespace WebApp
 
             services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<EFDBContext>();
 
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSenderSettings"));
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
