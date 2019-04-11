@@ -69,19 +69,20 @@
                 <div class="tab-pane" id="delete">
                     <h6>Для удаления аккаунта нажмите на кнопку: </h6>
                     <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-danger">Удалить аккаунт</button>
-                <div class="modal" id="myModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Удаление аккаунта</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                Вы уверенны, что хотите <b>безвозвратно</b> удалить свой аккаунт?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Нет, не удаляйте мой аккаунт</button>
-                                <a asp-action="DeleteUser" asp-controller="UserProfile" class="btn btn-danger" role="button">Да, удалить аккаунт</a>
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Удаление аккаунта</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    Вы уверенны, что хотите <b>безвозвратно</b> удалить свой аккаунт?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Нет, не удаляйте мой аккаунт</button>
+                                    <a asp-action="DeleteUser" asp-controller="UserProfile" class="btn btn-danger" role="button">Да, удалить аккаунт</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -89,5 +90,5 @@
             </div>
         </div>
     </div>
-</div>
+</div>    
 
