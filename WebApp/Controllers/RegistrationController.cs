@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using WebApp.Helpers;
 using WebApp.Models.DataModels;
 using WebApp.Models.DataModels.Entities;
@@ -17,10 +18,12 @@ namespace WebApp.Controllers
     public class RegistrationController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IOptions<EmailSettings> _emailConfig;
 
-        public RegistrationController(IUserService userService)
+        public RegistrationController(IUserService userService, IOptions<EmailSettings> options)
         {
             _userService = userService;
+            _emailConfig = options;
         }
 
         public IActionResult Index()
@@ -40,17 +43,21 @@ namespace WebApp.Controllers
                     Email = model.Email,
                     Password = new PasswordEncode().Encoder(model.Password) // SHA256
                 };
-                SendEmail(user);
-                _userService.InsertUser(user);
+                SendHelloEmail(user);
+                //_userService.InsertUser(user);
                 //return RedirectToAction("", "Login");
             }
             return RedirectToAction("Index", "Home");
         }
 
-        public void SendEmail(User user)
+        public void SendHelloEmail(User user)
         {
-            var emailSender = new EmailSender();
-            emailSender.SendEmail(user);
+            var emailSender = new EmailSender(_emailConfig);
+            emailSender.SendEmail
+                (user.Email,
+                "Регистрация в сервисе УрФУ Встречи",
+                $"Здравствуйте, {user.Name} {user.Surname}! Спасибо, что зарегистрировались в нашем сервисе!"
+                );
         }
 
         [HttpPost]

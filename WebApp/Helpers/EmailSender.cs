@@ -11,25 +11,39 @@ using WebApp.Models.DataModels.Entities;
 namespace WebApp.Helpers
 {
     public class EmailSender
-    {        
-        public void SendEmail(User user)
+    {
+        private readonly EmailSettings _emailConfig;
+
+        public EmailSender(IOptions<EmailSettings> options)
+        {
+            _emailConfig = new EmailSettings
+            {
+                Host = options.Value.Host,
+                Port = options.Value.Port,
+                UserName = options.Value.UserName,
+                EnableSSL = options.Value.EnableSSL,
+                Password = options.Value.Password
+            };
+        }
+
+        public void SendEmail(string userEmail, string subject, string text)
         {
             SmtpClient client = new SmtpClient
             {
-                Host = "smtp.mail.ru",
-                Port = 25,
-                EnableSsl = true,
+                Host = _emailConfig.Host,
+                Port = _emailConfig.Port,
+                EnableSsl = _emailConfig.EnableSSL,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("urfu-meetings@mail.ru", "EHaEdcnhtxb")
+                Credentials = new NetworkCredential(_emailConfig.UserName, _emailConfig.Password)
             };
 
             MailMessage mailMessage = new MailMessage
             {
-                From = new MailAddress("urfu-meetings@mail.ru"),
-                Subject = "Регистрация в сервисе УрФУ Встречи",
-                Body = "Спасибо, что зарегистрировались в нашем сервисе!",
-                To = { user.Email },
+                From = new MailAddress(_emailConfig.UserName),
+                Subject = subject,
+                Body = text,
+                To = { userEmail },
                 IsBodyHtml = true
             };
 
