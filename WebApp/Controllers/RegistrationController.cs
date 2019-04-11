@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Helpers;
 using WebApp.Models.DataModels;
@@ -37,10 +40,17 @@ namespace WebApp.Controllers
                     Email = model.Email,
                     Password = new PasswordEncode().Encoder(model.Password) // SHA256
                 };
+                SendEmail(user);
                 _userService.InsertUser(user);
                 //return RedirectToAction("", "Login");
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        public void SendEmail(User user)
+        {
+            var emailSender = new EmailSender();
+            emailSender.SendEmail(user);
         }
 
         [HttpPost]
