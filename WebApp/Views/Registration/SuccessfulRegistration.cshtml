@@ -1,0 +1,7 @@
+﻿@model WebApp.Models.DataModels.Entities.User
+@{
+    ViewData["Title"] = "SuccessfulRegistration";
+}
+
+<h2>Пользователь @Model.Name @Model.Surname успешно зарегистрирован!</h2>
+<h3>На вашу электронную почту @Model.Email отправлено письмо для <b>подтверждения</b> регистрации</h3>
