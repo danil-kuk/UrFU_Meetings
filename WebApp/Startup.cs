@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApp.Models.DataModels;
 using WebApp.Services;
+using WebApp.Services.Interfaces;
 
 namespace WebApp
 {
@@ -35,6 +36,7 @@ namespace WebApp
 
             services.AddScoped(typeof(IUserDataBase<>), typeof(UserDataBase<>));
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IActivationService, ActivationService>();
 
             services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<EFDBContext>();
 

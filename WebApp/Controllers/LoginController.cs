@@ -42,7 +42,13 @@ namespace WebApp.Controllers
                 }
                 else
                 {
-                    await Authenticate(user.Email);
+                    if (!user.EmailValid)
+                    {
+                        ModelState.AddModelError("Email", "Активируйте аккаунт");
+                        return View("Index");
+                    }
+                    else
+                        await Authenticate(user.Email);
                 }
             }
             return RedirectToAction("Index", "Home");

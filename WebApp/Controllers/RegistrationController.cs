@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -12,6 +13,7 @@ using WebApp.Helpers;
 using WebApp.Models.DataModels;
 using WebApp.Models.DataModels.Entities;
 using WebApp.Services;
+using WebApp.Services.Interfaces;
 
 namespace WebApp.Controllers
 {
@@ -19,11 +21,13 @@ namespace WebApp.Controllers
     {
         private readonly IUserService _userService;
         private readonly IOptions<EmailSettings> _emailConfig;
+        private readonly IActivationService _activationService;
 
-        public RegistrationController(IUserService userService, IOptions<EmailSettings> options)
+        public RegistrationController(IUserService userService, IOptions<EmailSettings> options, IActivationService activationService)
         {
             _userService = userService;
             _emailConfig = options;
+            _activationService = activationService;
         }
 
         public IActionResult Index()
@@ -43,20 +47,41 @@ namespace WebApp.Controllers
                     Email = model.Email,
                     Password = new PasswordEncode().Encoder(model.Password)
                 };
-                SendHelloEmail(user);
+                SendActivationEmail(user);
                 _userService.InsertUser(user);
                 return View("SuccessfulRegistration", model);
             }
             return RedirectToAction("Index", "Home");
         }
 
-        public void SendHelloEmail(User user)
+        [HttpGet]
+        public IActionResult Activation(string key)
+        {
+            string output = new AESEncryption().DecryptText(key);
+            string[] tokens = output.Split(":OSK:");
+            EmailValid emailValid = _activationService.GetByFilter(i => i.EmailToValid == tokens[0] && i.ActivationKey == tokens[2] && DateTime.Parse(i.Time.ToString()) == DateTime.Parse(tokens[1]));
+            if (emailValid != null)
+            {
+                if (DateTime.Now > DateTime.Parse(tokens[1]).AddDays(1))
+                {
+                    return View("EmailValidExpired");
+                }
+                _activationService.Delete(emailValid);
+                User user = _userService.GetByFilter(i => emailValid.EmailToValid == i.Email);
+                user.EmailValid = true;
+                _userService.UpdateUser(user);
+                return View("EmailValidSuccess");
+            }
+            return View("EmailValidFailed");
+        }
+
+        public void SendActivationEmail(User user)
         {
             var emailSender = new EmailSender(_emailConfig);
             emailSender.SendEmail
                 (user.Email,
-                "Регистрация в сервисе УрФУ Встречи",
-                $"Здравствуйте, {user.Name} {user.Surname}! Спасибо, что зарегистрировались в нашем сервисе!"
+                "Активация аккаунта",
+                $"</br><a href='https://localhost:44380/Registration/Activation?key=" + HttpUtility.UrlEncode(new EmailActivaitonKey(_activationService).ActivationKey(user.Email)) + "'><h1>Нажмите для активации<h1><a>"
                 );
         }
 
