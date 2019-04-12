@@ -3,28 +3,78 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using WebApp.Helpers;
+using WebApp.Models.DataModels;
 using WebApp.Models.DataModels.Entities;
 using WebApp.Models.ViewModels;
 using WebApp.Services;
+using WebApp.Services.Interfaces;
 
 namespace WebApp.Controllers
 {
     public class LoginController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IOptions<EmailSettings> _emailConfig;
+        private readonly IActivationService _activationService;
+        private readonly IPasswordResetService _passwordResetService;
 
-        public LoginController(IUserService userService)
+        public LoginController(IUserService userService, IOptions<EmailSettings> options, 
+            IActivationService activationService, IPasswordResetService passwordResetService)
         {
             _userService = userService;
+            _emailConfig = options;
+            _activationService = activationService;
+            _passwordResetService = passwordResetService;
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult ResetPassword(LoginViewModel model)
+        {
+            return View();
+        }
+
+        public IActionResult SendResetEmail(LoginViewModel model)
+        {
+            if (_userService.GetByFilter(i => i.Email == model.Email) == null)
+            {
+                ModelState.AddModelError("Email", "Проверьте правильность введеной электронной почты");
+                return View("ResetPassword");
+            }
+            var emailSender = new EmailSender(_emailConfig);
+            emailSender.SendEmail
+                (model.Email,
+                "Восстановление пароля",
+                $"</br><a href='https://localhost:44380/Login/EnterNewPassword?key=" + HttpUtility.UrlEncode(new PasswordResetKey(_passwordResetService).ActivationKey(model.Email)) + "'><h1>Нажмите для восстановления<h1><a>"
+                );
+            TempDataMessage("message", "primary", $"Инструкции по восстановлению пароля отправлены на указанную почту");
+            return View("ResetPassword");
+        }
+
+        [HttpGet]
+        public IActionResult EnterNewPassword(string key)
+        {
+            string output = new AESEncryption().DecryptText(key);
+            string[] tokens = output.Split(":OSK:");
+            PasswordReset passwordReset = _passwordResetService.GetByFilter(i => i.Email == tokens[0] && i.ActivationKey == tokens[2] && DateTime.Parse(i.Time.ToString()) == DateTime.Parse(tokens[1]));
+            if (passwordReset != null)
+            {
+                _passwordResetService.Delete(passwordReset);
+                User user = _userService.GetByFilter(i => passwordReset.Email == i.Email);
+                user.Password = new PasswordEncode().Encoder("123456"); //TODO
+                _userService.UpdateUser(user);
+                return RedirectToAction("Index", "UserProfile");
+            }
+            return View("EmailValidFailed");//TODO
         }
 
         [HttpPost]
@@ -71,6 +121,13 @@ namespace WebApp.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
+        }
+
+        public void TempDataMessage(string key, string alert, string value)
+        {
+            TempData.Remove(key);
+            TempData.Add(key, value);
+            TempData.Add("alertType", alert);
         }
     }
 }

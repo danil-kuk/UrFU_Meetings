@@ -37,6 +37,7 @@ namespace WebApp
             services.AddScoped(typeof(IUserDataBase<>), typeof(UserDataBase<>));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IActivationService, ActivationService>();
+            services.AddScoped<IPasswordResetService, PasswordResetService>();
 
             services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<EFDBContext>();
 

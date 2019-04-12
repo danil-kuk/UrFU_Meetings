@@ -8,26 +8,26 @@ using WebApp.Services.Interfaces;
 
 namespace WebApp.Services
 {
-    public class ActivationService : IActivationService
+    public class PasswordResetService : IPasswordResetService
     {
-        private readonly IUserDataBase<EmailValid> _userDataBase;
+        private readonly IUserDataBase<PasswordReset> _userDataBase;
 
-        public ActivationService(IUserDataBase<EmailValid> userDataBase)
+        public PasswordResetService(IUserDataBase<PasswordReset> userDataBase)
         {
             _userDataBase = userDataBase;
         }
 
-        public void Delete(EmailValid entity)
+        public void Delete(PasswordReset entity)
         {
             _userDataBase.Remove(entity);
         }
 
-        public EmailValid GetByFilter(Expression<Func<EmailValid, bool>> filter)
+        public PasswordReset GetByFilter(Expression<Func<PasswordReset, bool>> filter)
         {
             return _userDataBase.GetByFilter(filter);
         }
 
-        public void Insert(EmailValid entity)
+        public void Insert(PasswordReset entity)
         {
             _userDataBase.Insert(entity);
         }
