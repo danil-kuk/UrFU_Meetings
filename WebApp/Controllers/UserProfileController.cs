@@ -58,7 +58,12 @@ namespace WebApp.Controllers
         {
             User user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
             UpdateData(user, model);
-            return RedirectToAction("Index", "Home");
+            return View("Index", new UserProfileViewModel()
+            {
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.Email
+            });
         }
 
         private void UpdateData(User oldData, User newData)
@@ -71,10 +76,12 @@ namespace WebApp.Controllers
                 oldData.Email = newData.Email;
                 oldData.EmailValid = false;
                 ChangeEmail(oldData.Email);
+                TempDataMessage("message", "primary", $"Почта изменена! Подтвердите новую почту!");
             }
             else
             {
                 Relogin(oldData.Email);
+                TempDataMessage("message", "success", $"Ваши данные успешно изменены");
             }
             _userService.UpdateUserData();
         }
@@ -125,6 +132,13 @@ namespace WebApp.Controllers
                 return RedirectToAction("Index", "UserProfile");
             }
             return View("EmailValidFailed");//TODO
+        }
+
+        public void TempDataMessage(string key, string alert, string value)
+        {
+            TempData.Remove(key);
+            TempData.Add(key, value);
+            TempData.Add("alertType", alert);
         }
     }
 }
