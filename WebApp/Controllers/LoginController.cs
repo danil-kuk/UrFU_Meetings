@@ -38,7 +38,7 @@ namespace WebApp.Controllers
             return View();
         }
 
-        public IActionResult ResetPassword(LoginViewModel model)
+        public IActionResult ResetPassword()
         {
             return View();
         }
@@ -69,12 +69,20 @@ namespace WebApp.Controllers
             if (passwordReset != null)
             {
                 _passwordResetService.Delete(passwordReset);
-                User user = _userService.GetByFilter(i => passwordReset.Email == i.Email);
-                user.Password = new PasswordEncode().Encoder("123456"); //TODO
-                _userService.UpdateUser(user);
-                return RedirectToAction("Index", "UserProfile");
+                return View("EnterNewPassword", new User
+                {
+                    Email = passwordReset.Email
+                });
             }
             return View("EmailValidFailed");//TODO
+        }
+
+        public IActionResult ChangeToNewPassword(LoginViewModel model)
+        {
+            User user = _userService.GetByFilter(i => model.Email == i.Email);
+            user.Password = new PasswordEncode().Encoder(model.Password); //TODO
+            _userService.UpdateUser(user);
+            return RedirectToAction("Index", "UserProfile");
         }
 
         [HttpPost]
