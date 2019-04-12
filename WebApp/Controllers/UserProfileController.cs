@@ -3,24 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using WebApp.Helpers;
+using WebApp.Models.DataModels;
 using WebApp.Models.DataModels.Entities;
 using WebApp.Models.ViewModels;
 using WebApp.Services;
+using WebApp.Services.Interfaces;
 
 namespace WebApp.Controllers
 {
     public class UserProfileController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IOptions<EmailSettings> _emailConfig;
+        private readonly IActivationService _activationService;
 
-        public UserProfileController(IUserService userService)
+        public UserProfileController(IUserService userService, IOptions<EmailSettings> options, IActivationService activationService)
         {
             _userService = userService;
+            _emailConfig = options;
+            _activationService = activationService;
         }
 
         [Authorize]
@@ -50,7 +58,6 @@ namespace WebApp.Controllers
         {
             User user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
             UpdateData(user, model);
-
             return RedirectToAction("Index", "Home");
         }
 
@@ -58,9 +65,17 @@ namespace WebApp.Controllers
         {
             oldData.Name = char.ToUpper(newData.Name[0]) + newData.Name.Substring(1).ToLower();
             oldData.Surname = char.ToUpper(newData.Surname[0]) + newData.Surname.Substring(1).ToLower();
-            oldData.Email = newData.Email;
             oldData.Password = new PasswordEncode().Encoder(newData.Password);
-            ChangeEmail(oldData.Email);
+            if (oldData.Email != newData.Email)
+            {
+                oldData.Email = newData.Email;
+                oldData.EmailValid = false;
+                ChangeEmail(oldData.Email);
+            }
+            else
+            {
+                Relogin(oldData.Email);
+            }
             _userService.UpdateUserData();
         }
 
@@ -69,7 +84,7 @@ namespace WebApp.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
-        private async void ChangeEmail(string userName)
+        private async void Relogin(string userName)
         {
             ForceLogout();
             var claims = new List<Claim>
@@ -78,6 +93,38 @@ namespace WebApp.Controllers
             };
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        }
+
+        private void ChangeEmail(string userName)
+        {
+            var emailSender = new EmailSender(_emailConfig);
+            emailSender.SendEmail
+                (userName,
+                "Изменение почты",
+                $"</br><a href='https://localhost:44380/UserProfile/Activation?key=" + HttpUtility.UrlEncode(new EmailActivaitonKey(_activationService).ActivationKey(userName)) + "'><h1>Нажмите для активации<h1><a>"
+                );
+            ForceLogout();
+        }
+
+        [HttpGet]
+        public IActionResult Activation(string key)
+        {
+            string output = new AESEncryption().DecryptText(key);
+            string[] tokens = output.Split(":OSK:");
+            EmailValid emailValid = _activationService.GetByFilter(i => i.EmailToValid == tokens[0] && i.ActivationKey == tokens[2] && DateTime.Parse(i.Time.ToString()) == DateTime.Parse(tokens[1]));
+            if (emailValid != null)
+            {
+                if (DateTime.Now > DateTime.Parse(tokens[1]).AddDays(1))
+                {
+                    return View("EmailValidExpired");//TODO
+                }
+                _activationService.Delete(emailValid);
+                User user = _userService.GetByFilter(i => emailValid.EmailToValid == i.Email);
+                user.EmailValid = true;
+                _userService.UpdateUser(user);
+                return RedirectToAction("Index", "UserProfile");
+            }
+            return View("EmailValidFailed");//TODO
         }
     }
 }
