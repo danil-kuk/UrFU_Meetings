@@ -16,6 +16,13 @@
             </ul>
             <div class="tab-content py-4">
                 <div class="tab-pane active" id="edit">
+                    @if (TempData["message"] != null)
+                    {
+                        string alertType = "alert alert-" + TempData["alertType"];
+                        <div class="@alertType">
+                            @TempData["message"]
+                        </div>
+                    }
                     <form role="form" asp-action="ChangeUserData" asp-controller="UserProfile">
                         @using (Html.BeginForm())
                         {
