@@ -7,30 +7,30 @@ using WebApp.Services.Interfaces;
 
 namespace WebApp.Helpers
 {
-    public class EmailActivaitonKey
+    public class PasswordResetKey
     {
-        private readonly IActivationService _activationService;
+        private readonly IPasswordResetService _passwordResetService;
 
-        public EmailActivaitonKey(IActivationService activationService)
+        public PasswordResetKey(IPasswordResetService passwordResetService)
         {
-            _activationService = activationService;
+            _passwordResetService = passwordResetService;
         }
-        
+
         public string ActivationKey(string email)
         {
             string guid = Guid.NewGuid().ToString();
-            while (_activationService.GetByFilter(i => i.ActivationKey == guid) != null)
+            while (_passwordResetService.GetByFilter(i => i.ActivationKey == guid) != null)
             {
                 guid = Guid.NewGuid().ToString();
             }
             string key = email + ":OSK:" + DateTime.Now + ":OSK:" + guid;
-            EmailValid emailValid = new EmailValid
+            PasswordReset emailValid = new PasswordReset
             {
-                EmailToValid = email,
+                Email = email,
                 Time = DateTime.Now,
                 ActivationKey = guid
             };
-            _activationService.Insert(emailValid);
+            _passwordResetService.Insert(emailValid);
             return new AESEncryption().EncryptText(key);
         }
     }
