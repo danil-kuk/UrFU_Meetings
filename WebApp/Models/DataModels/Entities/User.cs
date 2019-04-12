@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebApp.Models.DataModels.Entities
 {
-    public class User
+    public partial class User
     {
         public int UserId { get; set; }
 
@@ -30,5 +30,7 @@ namespace WebApp.Models.DataModels.Entities
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+
+        public bool EmailValid { get; set; }
     }
 }

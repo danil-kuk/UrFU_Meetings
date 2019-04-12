@@ -5,6 +5,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190412062839_EmailValid.cs" />
+    <Compile Remove="Migrations\20190412062839_EmailValid.Designer.cs" />
+    <Compile Remove="Migrations\20190412063004_EmailValidation.cs" />
+    <Compile Remove="Migrations\20190412063004_EmailValidation.Designer.cs" />
+    <Compile Remove="Migrations\20190412063526_EmailValid2.cs" />
+    <Compile Remove="Migrations\20190412063526_EmailValid2.Designer.cs" />
+    <Compile Remove="Migrations\20190412064158_EmailValid.cs" />
+    <Compile Remove="Migrations\20190412064158_EmailValid.Designer.cs" />
+    <Compile Remove="Migrations\20190412064736_EmailValid.cs" />
+    <Compile Remove="Migrations\20190412064736_EmailValid.Designer.cs" />
+    <Compile Remove="Migrations\20190412065020_EmailValid.cs" />
+    <Compile Remove="Migrations\20190412065020_EmailValid.Designer.cs" />
+    <Compile Remove="Migrations\20190412065340_UserPasswordLengthCorrection.cs" />
+    <Compile Remove="Migrations\20190412065340_UserPasswordLengthCorrection.Designer.cs" />
+    <Compile Remove="Migrations\20190412065433_UserPasswordLengthCorrection.cs" />
+    <Compile Remove="Migrations\20190412065433_UserPasswordLengthCorrection.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.3.1" />
     <PackageReference Include="jQuery" Version="3.3.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
