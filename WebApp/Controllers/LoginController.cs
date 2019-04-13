@@ -91,11 +91,10 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = _userService.GetByFilter(i => i.Email == model.Email && i.Password == new PasswordEncode().Encoder(model.Password));
+                User user = _userService.GetByFilter(i => i.Email == model.Email);
                 if (user == null)
                 {
                     ModelState.AddModelError("Email", "Проверьте правильность введеной электронной почты");
-                    ModelState.AddModelError("Password", "Проверьте правильность введеного пароля");
                     return View("Index");
                 }
                 else
@@ -110,6 +109,12 @@ namespace WebApp.Controllers
                 }
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public JsonResult PasswordCheck(string password,string Email)
+        {
+            return Json(_userService.GetByFilter(i => i.Email == Email).Password == new PasswordEncode().Encoder(password));
         }
 
         private async Task Authenticate(string userName)
