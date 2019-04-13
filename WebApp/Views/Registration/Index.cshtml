@@ -2,10 +2,13 @@
 @{
     ViewData["Title"] = "Sign In";
 }
-<h2>Регистрация нового пользователя</h2>
 
-<div class="col-md-6">
+<link rel="stylesheet" href="~/css/signup-form.css">
+
+<div class="signup-form">
     <form role="form" asp-action="Register" asp-controller="Registration">
+        <div class="col-xs-8 col-xs-offset-4">
+			<h2>Регистрация</h2>
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()

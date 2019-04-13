@@ -3,9 +3,13 @@
     ViewData["Title"] = "Login";
 }
 
-<h2>Вход</h2>
-<div class="col-md-6">
+<link rel="stylesheet" href="~/css/signup-form.css">
+
+<div class="signup-form">
     <form role="form" asp-action="Login" asp-controller="Login">
+        <div class="col-xs-8 col-xs-offset-4">
+			<h2>Вход</h2>
+		</div>
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
@@ -20,8 +24,10 @@
                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
+            <div class="col-xs-8 col-xs-offset-4">
+				@Html.ActionLink("Забыли пароль?", "ResetPassword", "Login", routeValues: null, htmlAttributes: new { id = "passwordReset", @class = "extra" })
+			</div>  
             <input type="submit" value="Войти" class="btn btn-primary" />
         }
     </form>
 </div>
-@Html.ActionLink("Не помню свой пароль", "ResetPassword", "Login", routeValues: null, htmlAttributes: new { id = "passwordReset", @class = "nav-link" })
