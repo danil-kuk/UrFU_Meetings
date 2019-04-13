@@ -49,7 +49,7 @@ namespace WebApp.Controllers
                 };
                 SendActivationEmail(user);
                 _userService.InsertUser(user);
-                return View("SuccessfulRegistration", model);
+                return View("SuccessfulRegistration", user);
             }
             return RedirectToAction("Index", "Home");
         }
@@ -81,7 +81,7 @@ namespace WebApp.Controllers
             emailSender.SendEmail
                 (user.Email,
                 "Активация аккаунта",
-                $"</br><a href='https://localhost:44380/Registration/Activation?key=" + HttpUtility.UrlEncode(new EmailActivaitonKey(_activationService).ActivationKey(user.Email)) + "'><h1>Нажмите для активации<h1><a>"
+                $"</br><a href='https://{HttpContext.Request.Host}/Registration/Activation?key=" + HttpUtility.UrlEncode(new EmailActivaitonKey(_activationService).ActivationKey(user.Email)) + "'><h1>Нажмите для активации<h1><a>"
                 );
         }
 

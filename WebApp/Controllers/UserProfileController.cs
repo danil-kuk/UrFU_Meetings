@@ -108,7 +108,7 @@ namespace WebApp.Controllers
             emailSender.SendEmail
                 (userName,
                 "Изменение почты",
-                $"</br><a href='https://localhost:44380/UserProfile/Activation?key=" + HttpUtility.UrlEncode(new EmailActivaitonKey(_activationService).ActivationKey(userName)) + "'><h1>Нажмите для активации<h1><a>"
+                $"</br><a href='https://{HttpContext.Request.Host}/UserProfile/Activation?key=" + HttpUtility.UrlEncode(new EmailActivaitonKey(_activationService).ActivationKey(userName)) + "'><h1>Нажмите для активации<h1><a>"
                 );
             ForceLogout();
         }
