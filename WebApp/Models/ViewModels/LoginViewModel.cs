@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace WebApp.Models.ViewModels
 
         [Required(ErrorMessage = "Введите пароль")]
         [DataType(DataType.Password)]
+        [Remote("PasswordCheck", "Login", AdditionalFields = "Email", HttpMethod = "Post", ErrorMessage = "Проверьте правильность введеного пароля")]
         public string Password { get; set; }
     }
 }
