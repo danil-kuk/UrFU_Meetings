@@ -54,7 +54,7 @@ namespace WebApp.Controllers
             emailSender.SendEmail
                 (model.Email,
                 "Восстановление пароля",
-                $"</br><a href='https://localhost:44380/Login/EnterNewPassword?key=" + HttpUtility.UrlEncode(new PasswordResetKey(_passwordResetService).ActivationKey(model.Email)) + "'><h1>Нажмите для восстановления<h1><a>"
+                $"</br><a href='https://{HttpContext.Request.Host}/Login/EnterNewPassword?key=" + HttpUtility.UrlEncode(new PasswordResetKey(_passwordResetService).ActivationKey(model.Email)) + "'><h1>Нажмите для восстановления<h1><a>"
                 );
             TempDataMessage("message", "primary", $"Инструкции по восстановлению пароля отправлены на указанную почту");
             return View("ResetPassword");
