@@ -44,12 +44,20 @@ namespace WebApp.Controllers
         }
 
         [Authorize]
-        public IActionResult DeleteUser()
+        public IActionResult DeleteUser(UserProfileViewModel model)
         {
             User user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
             _userService.DeleteUser(user);
             ForceLogout();
             return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize]
+        [HttpPost]
+        public JsonResult PasswordCheckBeforeDelete(string DeleteConfirm)
+        {
+            User user= _userService.GetByFilter(i => i.Email == User.Identity.Name);
+            return Json(user != null && user.Password == new PasswordEncode().Encoder(DeleteConfirm));
         }
 
         [HttpPost]

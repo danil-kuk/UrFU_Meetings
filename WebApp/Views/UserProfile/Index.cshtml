@@ -85,12 +85,23 @@
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body">
-                                    Вы уверенны, что хотите <b>безвозвратно</b> удалить свой аккаунт?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" data-dismiss="modal">Нет, не удаляйте мой аккаунт</button>
-                                    <a asp-action="DeleteUser" asp-controller="UserProfile" class="btn btn-danger" role="button">Да, удалить аккаунт</a>
-                                </div>
+                                    <form role="form" asp-action="DeleteUser" asp-controller="UserProfile" , method="post">
+                                        Вы уверенны, что хотите <b>безвозвратно</b> удалить свой аккаунт?
+                                        @using (Html.BeginForm())
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true, "Не удалось удалить аккаунт, попробуйте снова")
+                                            <div class="form-group">
+                                                <label>Для подтверждения удаления введите пароль от аккаунта: </label>
+                                                @Html.EditorFor(model => model.DeleteConfirm, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.DeleteConfirm, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div align="right">
+                                                <button type="button" class="btn btn-success" data-dismiss="modal">Нет, не удаляйте мой аккаунт</button>
+                                                <input type="submit" value="Да, удалить аккаунт" class="btn btn-danger" />
+                                            </div>
+                                        }
+                                    </form>
                             </div>
                         </div>
                     </div>
