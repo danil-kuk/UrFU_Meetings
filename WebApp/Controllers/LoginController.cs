@@ -114,7 +114,8 @@ namespace WebApp.Controllers
         [HttpPost]
         public JsonResult PasswordCheck(string password,string Email)
         {
-            return Json(_userService.GetByFilter(i => i.Email == Email).Password == new PasswordEncode().Encoder(password));
+            var user = _userService.GetByFilter(i => i.Email == Email);
+            return Json(user != null && user.Password == new PasswordEncode().Encoder(password));
         }
 
         private async Task Authenticate(string userName)
