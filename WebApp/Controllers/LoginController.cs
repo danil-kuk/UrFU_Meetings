@@ -104,18 +104,25 @@ namespace WebApp.Controllers
                         ModelState.AddModelError("Email", "Активируйте аккаунт");
                         return View("Index");
                     }
-                    else
+                    else if (new PasswordEncode().Encoder(model.Password) == user.Password)
+                    {
                         await Authenticate(user.Email);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Password", "Проверьте правильность введенного пароля");
+                        return View("Index");
+                    }
                 }
             }
             return RedirectToAction("Index", "Home");
         }
 
+
         [HttpPost]
-        public JsonResult PasswordCheck(string password,string Email)
+        public JsonResult PasswordCheck(string password)
         {
-            var user = _userService.GetByFilter(i => i.Email == Email);
-            return Json(user != null && user.Password == new PasswordEncode().Encoder(password));
+            return Json(password != null && password.Length > 5);
         }
 
         private async Task Authenticate(string userName)

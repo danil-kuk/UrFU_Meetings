@@ -16,7 +16,7 @@ namespace WebApp.Models.ViewModels
 
         [Required(ErrorMessage = "Введите пароль")]
         [DataType(DataType.Password)]
-        [Remote("PasswordCheck", "Login", AdditionalFields = "Email", HttpMethod = "Post", ErrorMessage = "Проверьте правильность введеного пароля")]
+        [Remote("PasswordCheck", "Login", HttpMethod = "Post", ErrorMessage = "Проверьте правильность введеного пароля")]
         public string Password { get; set; }
     }
 }
