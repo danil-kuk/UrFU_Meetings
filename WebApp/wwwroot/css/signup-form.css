@@ -5,7 +5,7 @@ body {
 .form-control {
     border-color: #eee;
     min-height: 41px;
-    box-shadow: none !important;
+    box-shadow: none;
 }
 .form-control:focus {
     border-color: #5cd3b4;
@@ -24,7 +24,7 @@ body {
     display: inline-block;
     padding: 0 30px 10px 0;
     border-bottom: 3px solid #5cd3b4;
-    font-weight: 600
+    font-weight: 600;
 }
 .signup-form form {
     color: #999;
@@ -55,7 +55,7 @@ body {
 }
 .signup-form .btn:hover, .signup-form .btn:focus {
     background: #41cba9;
-    outline: none !important;
+    outline: none;
 }
 .signup-form a {
     color: #5cd3b4;

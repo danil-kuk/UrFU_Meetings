@@ -50,6 +50,8 @@ namespace WebApp.Controllers
                 ModelState.AddModelError("Email", "Проверьте правильность введеной электронной почты");
                 return View("ResetPassword");
             }
+            if (_passwordResetService.GetByFilter(i => i.Email == model.Email) != null)
+                return RedirectToAction("Index", "Home");
             var emailSender = new EmailSender(_emailConfig);
             emailSender.SendEmail
                 (model.Email,
@@ -74,7 +76,7 @@ namespace WebApp.Controllers
                     Email = passwordReset.Email
                 });
             }
-            return View("EmailValidFailed");//TODO
+            return View("EnterNewPasswordFailed");//TODO
         }
 
         public IActionResult ChangeToNewPassword(LoginViewModel model)
