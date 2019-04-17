@@ -66,7 +66,8 @@ namespace WebApp.Controllers
             {
                 if (DateTime.Now > DateTime.Parse(tokens[1]).AddDays(1)) //email о подтверждении истекает через 1 день
                 {
-                    return View("EmailValidExpired");
+                    _activationService.Delete(emailValid);
+                    return View("EmailValidExpired", new User { Email = emailValid.EmailToValid });
                 }
                 _activationService.Delete(emailValid);
                 User user = _userService.GetByFilter(i => emailValid.EmailToValid == i.Email);
@@ -74,7 +75,21 @@ namespace WebApp.Controllers
                 _userService.UpdateUser(user);
                 return View("EmailValidSuccess");
             }
-            return View("EmailValidFailed");
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public IActionResult RepeatEmailActivation(User model)
+        {
+            User user = _userService.GetByFilter(i => model.Email == i.Email);
+            SendActivationEmail(user);
+            return RedirectToAction("RepeatActivation", model);
+        }
+
+        [HttpGet]
+        public IActionResult RepeatActivation(User model)
+        {
+            return View("RepeatActivation", model);
         }
 
         public void SendActivationEmail(User user)

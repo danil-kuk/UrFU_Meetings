@@ -1,7 +1,24 @@
-﻿
+﻿@model WebApp.Models.DataModels.Entities.User
 @{
     ViewData["Title"] = "EmailValidExpired";
 }
 
-<h2>EmailValidExpired</h2>
+<h2>Ой-ой, похоже, что срок подтверждения данной электронной почты истек.</h2>
+<h2>Чтобы получить доступ к аккаунту, подтвердите почту:</h2>
+<div class="col-md-6">
+    <form role="form" asp-action="RepeatEmailActivation" asp-controller="Registration">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "Не удалось повторно отправить письмо, попробуйте снова")
+            <div class="form-group" hidden>
+                <label>Почта: </label>
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+            <h3>На почту @Model.Email будет отправлено новое письмо для подтверждения</h3>
+            <input type="submit" value="Отправить подтверждение" class="btn btn-primary" />
+        }
+    </form>
+</div>
 

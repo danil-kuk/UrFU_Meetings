@@ -76,13 +76,13 @@ namespace WebApp.Controllers
                     Email = passwordReset.Email
                 });
             }
-            return View("EnterNewPasswordFailed");//TODO
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult ChangeToNewPassword(LoginViewModel model)
         {
             User user = _userService.GetByFilter(i => model.Email == i.Email);
-            user.Password = new PasswordEncode().Encoder(model.Password); //TODO
+            user.Password = new PasswordEncode().Encoder(model.Password);
             _userService.UpdateUser(user);
             return RedirectToAction("Index", "UserProfile");
         }
