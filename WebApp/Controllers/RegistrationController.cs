@@ -47,6 +47,8 @@ namespace WebApp.Controllers
                     Email = model.Email,
                     Password = new PasswordEncode().Encoder(model.Password)
                 };
+                if (_userService.GetByFilter(i => i.Email == user.Email) != null)
+                    return RedirectToAction("Index", "Home");
                 SendActivationEmail(user);
                 _userService.InsertUser(user);
                 return View("SuccessfulRegistration", user);
@@ -62,7 +64,7 @@ namespace WebApp.Controllers
             EmailValid emailValid = _activationService.GetByFilter(i => i.EmailToValid == tokens[0] && i.ActivationKey == tokens[2] && DateTime.Parse(i.Time.ToString()) == DateTime.Parse(tokens[1]));
             if (emailValid != null)
             {
-                if (DateTime.Now > DateTime.Parse(tokens[1]).AddDays(1))
+                if (DateTime.Now > DateTime.Parse(tokens[1]).AddDays(1)) //email о подтверждении истекает через 1 день
                 {
                     return View("EmailValidExpired");
                 }
