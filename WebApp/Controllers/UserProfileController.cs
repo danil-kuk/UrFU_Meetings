@@ -129,17 +129,13 @@ namespace WebApp.Controllers
             EmailValid emailValid = _activationService.GetByFilter(i => i.EmailToValid == tokens[0] && i.ActivationKey == tokens[2] && DateTime.Parse(i.Time.ToString()) == DateTime.Parse(tokens[1]));
             if (emailValid != null)
             {
-                if (DateTime.Now > DateTime.Parse(tokens[1]).AddDays(1))
-                {
-                    return View("EmailValidExpired");//TODO
-                }
                 _activationService.Delete(emailValid);
                 User user = _userService.GetByFilter(i => emailValid.EmailToValid == i.Email);
                 user.EmailValid = true;
                 _userService.UpdateUser(user);
-                return RedirectToAction("Index", "UserProfile");
+                return View("SuccessfulEmailChange");
             }
-            return View("EmailValidFailed");//TODO
+            return RedirectToAction("Index", "Home");
         }
 
         public void TempDataMessage(string key, string alert, string value)
