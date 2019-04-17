@@ -64,7 +64,8 @@ namespace WebApp.Controllers
             EmailValid emailValid = _activationService.GetByFilter(i => i.EmailToValid == tokens[0] && i.ActivationKey == tokens[2] && DateTime.Parse(i.Time.ToString()) == DateTime.Parse(tokens[1]));
             if (emailValid != null)
             {
-                if (DateTime.Now > DateTime.Parse(tokens[1]).AddDays(1)) //email о подтверждении истекает через 1 день
+                //if (DateTime.Now > DateTime.Parse(tokens[1]).AddDays(1)) //email о подтверждении истекает через 1 день
+                if (DateTime.Now > DateTime.Parse(tokens[1]).AddSeconds(20))
                 {
                     _activationService.Delete(emailValid);
                     return View("EmailValidExpired", new User { Email = emailValid.EmailToValid });
