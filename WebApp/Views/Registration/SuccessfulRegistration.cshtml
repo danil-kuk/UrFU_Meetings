@@ -3,5 +3,14 @@
     ViewData["Title"] = "SuccessfulRegistration";
 }
 
-<h2>Пользователь @Model.Name @Model.Surname успешно зарегистрирован!</h2>
-<h3>На вашу электронную почту @Model.Email отправлено письмо для <b>подтверждения</b> регистрации</h3>
+<link rel="stylesheet" href="~/css/signup-form.css">
+
+<div class="signup-form">
+    <form>
+        <div class="col-xs-8 col-xs-offset-4">
+			<h2>Подтверждение почты</h2>
+            <h3>Пользователь @Model.Name @Model.Surname успешно зарегистрирован!</h3>
+            <h4>На вашу электронную почту @Model.Email отправлено письмо для <b>подтверждения</b> регистрации</h4>
+		</div>
+    </form>
+</div>
