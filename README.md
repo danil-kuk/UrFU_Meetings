@@ -180,9 +180,13 @@ UrFU-Meetings-Db
 **Обмен файлами**: Google Drive;  
 **Система контроля версий**: Git, GitHub;  
 **Прототипирование и дизайн**: Figma, Adobe Photoshop, Adobe Illustrator;  
-**Работа с Front-end и Back-End**: Visual Studio 2017, Visual Studio Code (+ extensions);  
-**Back-end**: C#, ASP.NET Core MVC, MS SQL Server;  
-**Front-end**: Razor, XML, HTML, CSS, JavaScript.  
+**Работа с Front-end и Back-End**: Visual Studio, Visual Studio Code;  
+**Back-end**: C#, ASP.NET Core, MS SQL Server;  
+**Front-end**: Razor, HTML, CSS, JavaScript;  
+**Back-end библиотеки и фреймворки**: EntityFrameworkCore, EntityFrameworkCore.Tools, EntityFrameworkCore.SqlServer, NUnit 3;  
+**Front-end библиотеки и фреймворки**: AspNetCore.Razor.Design, Bootstrap 4, jQuery;  
+**Расширения для Visual Studio**: GitHub Extension for Visual Studio, NUnit 3 Test Adapter;  
+**Расширения для Visual Studio Code**: C# for Visual Studio Code.     
 
 Дополнительная информация
 ==================================
