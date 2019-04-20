@@ -1,0 +1,16 @@
+﻿@model WebApp.Models.DataModels.Entities.User
+@{
+    ViewData["Title"] = "RepeatActivation";
+}
+<link rel="stylesheet" href="~/css/signup-form.css">
+
+<div class="signup-form">
+    <form>
+        <div class="col-xs-8 col-xs-offset-4">
+			<h2>Подтверждение почты</h2>
+            <h3>Письмо для повторной активации отправлено на почту <b>@Model.Email</b></h3>
+		</div>
+    </form>
+</div>
+
+

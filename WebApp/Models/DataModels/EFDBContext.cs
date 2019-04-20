@@ -14,5 +14,7 @@ namespace WebApp.Models.DataModels
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<EmailValid> EmailValid { get; set; }
+        public DbSet<PasswordReset> PasswordReset { get; set; }
     }
 }

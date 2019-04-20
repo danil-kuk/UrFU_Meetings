@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp.Models.DataModels;
 
 namespace WebApp.Migrations
 {
     [DbContext(typeof(EFDBContext))]
-    partial class EFDBContextModelSnapshot : ModelSnapshot
+    [Migration("20190412071345_UserEmailValid")]
+    partial class UserEmailValid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,27 +40,6 @@ namespace WebApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EmailValid");
-                });
-
-            modelBuilder.Entity("WebApp.Models.DataModels.Entities.PasswordReset", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ActivationKey")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property<DateTime>("Time");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PasswordReset");
                 });
 
             modelBuilder.Entity("WebApp.Models.DataModels.Entities.User", b =>
