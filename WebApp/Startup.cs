@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebApp.Models.DataModels;
+using WebApp.Services;
+using WebApp.Services.Interfaces;
 
 namespace WebApp
 {
@@ -30,13 +34,26 @@ namespace WebApp
             services.AddDbContext<EFDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddScoped(typeof(IUserDataBase<>), typeof(UserDataBase<>));
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IActivationService, ActivationService>();
+            services.AddScoped<IPasswordResetService, PasswordResetService>();
+
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<EFDBContext>();
+
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSenderSettings"));
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => //CookieAuthenticationOptions
+                {
+                    options.LoginPath = new PathString("/Login");
+                });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -55,7 +72,8 @@ namespace WebApp
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

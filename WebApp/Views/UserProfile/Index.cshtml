@@ -1,0 +1,114 @@
+﻿@model WebApp.Models.ViewModels.UserProfileViewModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container">
+    <div class="row my-2">
+        <div class="col-lg-8 order-lg-2">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link active">Информация</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#delete" data-toggle="tab" class="nav-link">Дополнительно</a>
+                </li>
+            </ul>
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="edit">
+                    @if (TempData["message"] != null)
+                    {
+                        string alertType = "alert alert-" + TempData["alertType"];
+                        <div class="@alertType">
+                            @TempData["message"]
+                        </div>
+                    }
+                    <form role="form" asp-action="ChangeUserData" asp-controller="UserProfile">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "Не удалось изменить данные, попробуйте снова")
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Имя</label>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Фамилия</label>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
+                                    @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    <small>*При изменении почты её необходимо заново подтвердить</small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Изменить пароль</label>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Подтвердите пароль</label>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label"></label>
+                                <div class="col-lg-9">
+                                    <input type="reset" class="btn btn-secondary" value="Отмена">
+                                    <input type="submit" class="btn btn-primary" value="Сохранить изменения">
+                                </div>
+                            </div>
+                        }
+                    </form>
+                </div>
+                <div class="tab-pane" id="delete">
+                    <h6>Для удаления аккаунта нажмите на кнопку: </h6>
+                    <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-danger">Удалить аккаунт</button>
+                    <div class="modal" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Удаление аккаунта</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <form role="form" asp-action="DeleteUser" asp-controller="UserProfile" , method="post">
+                                        Вы уверенны, что хотите <b>безвозвратно</b> удалить свой аккаунт?
+                                        @using (Html.BeginForm())
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true, "Не удалось удалить аккаунт, попробуйте снова")
+                                            <div class="form-group">
+                                                <label>Для подтверждения удаления введите пароль от аккаунта: </label>
+                                                @Html.EditorFor(model => model.DeleteConfirm, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.DeleteConfirm, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div align="right">
+                                                <button type="button" class="btn btn-success" data-dismiss="modal">Нет, не удаляйте мой аккаунт</button>
+                                                <input type="submit" value="Да, удалить аккаунт" class="btn btn-danger" />
+                                            </div>
+                                        }
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
