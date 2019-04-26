@@ -13,9 +13,10 @@
 
 <h2>@Model.EventName</h2>
 <h3>@Model.Description</h3>
-<h3>@Model.Date</h3>
-<h3>@Model.Time</h3>
-<h3>@Model.Place</h3>
+<h3>Дата: @Model.Date.ToShortDateString()</h3>
+<h3>Время: @Model.Time.ToShortTimeString()</h3>
+<h3>Место: @Model.Place</h3>
+<h3>Контакты организатора: @Model.Contacts</h3>
 @if (Model.MaxParticipants > 0)
 {
     <h3>Кол-во участников: @Model.Participants.Count из @Model.MaxParticipants</h3>
@@ -26,6 +27,12 @@
 {
     <h4>@participant.User.Name @participant.User.Surname</h4>
 }
-@Html.ActionLink("Участвовать", "SubscribeToEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "subscribeButton", @class = "btn btn-primary" })
-
+@if (Model.MaxParticipants == Model.Participants.Count)
+{
+    <h4 class="text-primary">Максимальное количество участников</h4>
+}
+else
+{
+    @Html.ActionLink("Участвовать", "SubscribeToEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "subscribeButton", @class = "btn btn-primary" });
+}
 

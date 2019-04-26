@@ -37,9 +37,14 @@ namespace WebApp.Services
             _databaseEvent.Insert(selectedEvent);
         }
 
-        public void AddNewParticipant(Event selectedEvent, EventParticipant eventParticipant)
+        public void AddNewParticipant(Event selectedEvent, User userToAdd)
         {
-            selectedEvent.Participants.Add(eventParticipant);
+            var newParticipant = new EventParticipant
+            {
+                Event = selectedEvent,
+                User = userToAdd
+            };
+            selectedEvent.Participants.Add(newParticipant);
             UpdateEvent(selectedEvent);
         }
 

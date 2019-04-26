@@ -35,15 +35,21 @@ namespace WebApp.Services
         {
             _databaseUser.Insert(user);
         }
+
+        public void SubscribeUserToEvent(User selectedUser, Event eventToSubscribe)
+        {
+            var newSubscription = new EventParticipant
+            {
+                Event = eventToSubscribe,
+                User = selectedUser
+            };
+            selectedUser.SubscribedEvents.Add(newSubscription);
+            UpdateUser(selectedUser);
+        }
+
         public void UpdateUser(User user)
         {
             _databaseUser.Update(user);
-        }
-
-        public void AddNewParticipant(User selectedUser, EventParticipant eventParticipant)
-        {
-            selectedUser.SubscribedEvents.Add(eventParticipant);
-            UpdateUser(selectedUser);
         }
 
         public void UpdateUserData()

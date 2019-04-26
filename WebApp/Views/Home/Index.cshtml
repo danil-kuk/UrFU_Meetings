@@ -21,7 +21,7 @@
         </th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.OrderBy(i => i.Date))
     {
         <tr>
             <td>
@@ -31,7 +31,11 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Participants.Count)
+                @item.Participants.Count
+                @if (item.MaxParticipants > 0)
+                {
+                     <text> / @item.MaxParticipants</text>
+                }
             </td>
             <td>
                 @Html.ActionLink("Подробнее", "Index", "EventPage", new { id = item.EventId })
