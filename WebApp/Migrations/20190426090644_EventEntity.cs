@@ -21,7 +21,7 @@ namespace WebApp.Migrations
                     Place = table.Column<string>(nullable: false),
                     OrganizerId = table.Column<int>(nullable: false),
                     Contacts = table.Column<string>(nullable: false),
-                    MaxParticipants = table.Column<int>(nullable: false)
+                    MaxParticipants = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {

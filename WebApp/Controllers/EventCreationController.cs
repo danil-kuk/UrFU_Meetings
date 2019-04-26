@@ -44,7 +44,7 @@ namespace WebApp.Controllers
                     Contacts = model.Contacts
                 };
                 _eventService.InsertEvent(newEvent);
-                return RedirectToAction("Index", "EventPage", newEvent);
+                return RedirectToAction("Index", "EventPage", new { id = newEvent.EventId });
             }
             return RedirectToAction("Index", "Home");
         }
