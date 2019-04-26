@@ -32,6 +32,13 @@ namespace WebApp.Models.DataModels
                 .HasOne(ep => ep.User)
                 .WithMany(u => u.SubscribedEvents)
                 .HasForeignKey(ep => ep.UserId);
+
+            modelBuilder
+                .Entity<Event>()
+                .Property(e => e.EventTheme)
+                .HasConversion(
+                v => v.ToString(),
+                v => (EventTheme)Enum.Parse(typeof(EventTheme), v));
         }
     }
 }

@@ -21,6 +21,7 @@ namespace WebApp.Controllers
             _userService = userService;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View();
@@ -39,6 +40,7 @@ namespace WebApp.Controllers
                     Date = model.Date,
                     Time = model.Time,
                     Place = model.Place,
+                    EventTheme = model.EventTheme,
                     MaxParticipants = model.MaxParticipants,
                     OrganizerId = _userService.GetByFilter(i => i.Email == User.Identity.Name).UserId,
                     Contacts = model.Contacts

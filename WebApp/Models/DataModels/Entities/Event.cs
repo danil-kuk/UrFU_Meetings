@@ -35,6 +35,9 @@ namespace WebApp.Models.DataModels.Entities
 
         [Required(ErrorMessage = "Укажите свои контакты")]
         public string Contacts { get; set; }
+
+        [Required(ErrorMessage = "Выберите тему мероприятия")]
+        public EventTheme EventTheme { get; set; }
         
         public int? MaxParticipants { get; set; }
     }

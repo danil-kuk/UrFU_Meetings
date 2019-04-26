@@ -11,6 +11,9 @@
             Название
         </th>
         <th>
+            Тема
+        </th>
+        <th>
             Дата проведения
         </th>
         <th>
@@ -23,23 +26,26 @@
 
     @foreach (var item in Model.OrderBy(i => i.Date))
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @item.Participants.Count
-                @if (item.MaxParticipants > 0)
-                {
-                     <text> / @item.MaxParticipants</text>
-                }
-            </td>
-            <td>
-                @Html.ActionLink("Подробнее", "Index", "EventPage", new { id = item.EventId })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventTheme)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @item.Participants.Count
+            @if (item.MaxParticipants > 0)
+            {
+                <text> / @item.MaxParticipants</text>
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Подробнее", "Index", "EventPage", new { id = item.EventId })
+        </td>
+    </tr>
     }
 </table>
