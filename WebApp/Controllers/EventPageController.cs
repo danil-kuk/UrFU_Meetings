@@ -63,6 +63,13 @@ namespace WebApp.Controllers
             return RedirectToAction("Index", new { id = model.EventId });
         }
 
+        [Authorize]
+        public IActionResult DeleteEvent(Event model)
+        {
+            _eventService.DeleteEvent(model);
+            return RedirectToAction("Index", "Home");
+        }
+
         public void TempDataMessage(string key, string alert, string value)
         {
             TempData.Remove(key);
