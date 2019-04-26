@@ -10,9 +10,9 @@ namespace WebApp.Services
 {
     public class PasswordResetService : IPasswordResetService
     {
-        private readonly IUserDataBase<PasswordReset> _userDataBase;
+        private readonly IDataBaseService<PasswordReset> _userDataBase;
 
-        public PasswordResetService(IUserDataBase<PasswordReset> userDataBase)
+        public PasswordResetService(IDataBaseService<PasswordReset> userDataBase)
         {
             _userDataBase = userDataBase;
         }

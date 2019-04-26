@@ -1,5 +1,42 @@
-﻿@{
+﻿@model IEnumerable<WebApp.Models.DataModels.Entities.Event>
+@{
     ViewData["Title"] = "Home Page";
 }
 
+<h2>Все мероприятия</h2>
 
+<table class="table">
+    <tr>
+        <th>
+            Название
+        </th>
+        <th>
+            Дата проведения
+        </th>
+        <th>
+            Кол-во участников
+        </th>
+        <th>
+            Страница мероприятия
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Participants.Count)
+            </td>
+            <td>
+                @Html.ActionLink("Подробнее", "Index", "EventPage", item)
+            </td>
+        </tr>
+    }
+
+</table>

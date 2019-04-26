@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApp.Services
 {
-    public interface IUserDataBase<T>
+    public interface IDataBaseService<T>
     {
         IEnumerable<T> GetAll();
         T GetById(int id);
@@ -15,7 +15,7 @@ namespace WebApp.Services
         int GetCount(Expression<Func<T, bool>> filter);
         void Insert(T entity);
         void Remove(T entity);
-        void UpdateUserData();
+        void UpdateData();
         void Update(T entity);
     }
 }

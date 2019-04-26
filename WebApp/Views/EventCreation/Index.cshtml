@@ -1,0 +1,49 @@
+﻿@model WebApp.Models.DataModels.Entities.Event
+@{
+    ViewData["Title"] = "EventCreation";
+}
+
+<div class="event-editor">
+    <form role="form" asp-action="CreateNewEvent" asp-controller="EventCreation">
+        <div class="col-xs-8 col-xs-offset-4">
+            <h2>Создание нового мероприятия</h2>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "Не удалось создать мероприятие, попробуйте снова")
+                <div class="form-group">
+                    <label>Название: </label>
+                    @Html.EditorFor(model => model.EventName, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
+                    @Html.ValidationMessageFor(model => model.EventName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label>Описание: </label>
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label>Дата: </label>
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label>Время: </label>
+                    @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label>Место: </label>
+                    @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <label>Контакты: </label>
+                    @Html.EditorFor(model => model.Contacts, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Contacts, "", new { @class = "text-danger" })
+                </div>
+                <input type="submit" value="Создать мероприятие" class="btn btn-primary" />
+            }
+        </div>
+    </form>
+</div>
+

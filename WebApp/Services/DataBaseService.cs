@@ -8,12 +8,12 @@ using WebApp.Models.DataModels;
 
 namespace WebApp.Services
 {
-    public class UserDataBase<T> : IUserDataBase<T> where T : class, new()
+    public class DataBaseService<T> : IDataBaseService<T> where T : class, new()
     {
         private readonly EFDBContext _context;
         private readonly DbSet<T> _entities;
 
-        public UserDataBase(EFDBContext context)
+        public DataBaseService(EFDBContext context)
         {
             _context = context;
             _entities = context.Set<T>();
@@ -74,7 +74,7 @@ namespace WebApp.Services
             SaveChanges();
         }
 
-        public void UpdateUserData()
+        public void UpdateData()
         {
             SaveChanges();
         }

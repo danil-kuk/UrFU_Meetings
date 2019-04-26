@@ -21,6 +21,20 @@
     <Compile Remove="Migrations\20190412065340_UserPasswordLengthCorrection.Designer.cs" />
     <Compile Remove="Migrations\20190412065433_UserPasswordLengthCorrection.cs" />
     <Compile Remove="Migrations\20190412065433_UserPasswordLengthCorrection.Designer.cs" />
+    <Compile Remove="Migrations\20190423153536_EventEntity.cs" />
+    <Compile Remove="Migrations\20190423153536_EventEntity.Designer.cs" />
+    <Compile Remove="Migrations\20190423160441_EventEntity.cs" />
+    <Compile Remove="Migrations\20190423160441_EventEntity.Designer.cs" />
+    <Compile Remove="Migrations\20190424155617_EventEntity.cs" />
+    <Compile Remove="Migrations\20190424155617_EventEntity.Designer.cs" />
+    <Compile Remove="Migrations\20190424162415_EventEntity.cs" />
+    <Compile Remove="Migrations\20190424162415_EventEntity.Designer.cs" />
+    <Compile Remove="Migrations\20190424162519_EventEntity.cs" />
+    <Compile Remove="Migrations\20190424162519_EventEntity.Designer.cs" />
+    <Compile Remove="Migrations\20190424172604_EventEntity.cs" />
+    <Compile Remove="Migrations\20190424172604_EventEntity.Designer.cs" />
+    <Compile Remove="Migrations\20190425150626_EntitiesAdjustments.cs" />
+    <Compile Remove="Migrations\20190425150626_EntitiesAdjustments.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
