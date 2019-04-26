@@ -27,12 +27,12 @@ namespace WebApp.Controllers
             _context = context;
         }
 
-        public IActionResult Index(Event model)
+        public IActionResult Index(int id)
         {
-            if (!ModelState.IsValid)
+            if (_eventService.GetById(id) == null)
                 return RedirectToAction("Index", "Home");
             //Постараться убрать в другое место
-            var selectedEvent = _context.Events.Where(e => e.EventId == model.EventId).Include(c => c.Participants).FirstOrDefault();
+            var selectedEvent = _context.Events.Where(e => e.EventId == id).Include(c => c.Participants).FirstOrDefault();
             foreach (var user in selectedEvent.Participants)
                 user.User = _userService.GetById(user.UserId);
             return View(selectedEvent);

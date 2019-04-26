@@ -34,9 +34,8 @@
                 @Html.DisplayFor(modelItem => item.Participants.Count)
             </td>
             <td>
-                @Html.ActionLink("Подробнее", "Index", "EventPage", item)
+                @Html.ActionLink("Подробнее", "Index", "EventPage", new { id = item.EventId })
             </td>
         </tr>
     }
-
 </table>

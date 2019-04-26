@@ -78,6 +78,8 @@ namespace WebApp
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute("EventPage", "Event/{id?}", new { controller = "EventPage", action = "Index" });
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
