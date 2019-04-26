@@ -39,6 +39,12 @@
     <Compile Remove="Migrations\20190425155327_EventEntity.Designer.cs" />
     <Compile Remove="Migrations\20190426090624_Event-Entity.cs" />
     <Compile Remove="Migrations\20190426090624_Event-Entity.Designer.cs" />
+    <Compile Remove="Migrations\20190426090644_EventEntity.cs" />
+    <Compile Remove="Migrations\20190426090644_EventEntity.Designer.cs" />
+    <Compile Remove="Migrations\20190426140801_EventEntity.cs" />
+    <Compile Remove="Migrations\20190426140801_EventEntity.Designer.cs" />
+    <Compile Remove="Migrations\20190426142651_EventEntity.cs" />
+    <Compile Remove="Migrations\20190426142651_EventEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

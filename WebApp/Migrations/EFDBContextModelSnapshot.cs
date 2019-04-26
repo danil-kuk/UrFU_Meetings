@@ -57,6 +57,9 @@ namespace WebApp.Migrations
                     b.Property<string>("EventName")
                         .IsRequired();
 
+                    b.Property<string>("EventTheme")
+                        .IsRequired();
+
                     b.Property<int?>("MaxParticipants");
 
                     b.Property<int>("OrganizerId");
