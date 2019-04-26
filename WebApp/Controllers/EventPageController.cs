@@ -52,11 +52,11 @@ namespace WebApp.Controllers
             if (user.SubscribedEvents.Select(e => e.EventId).Contains(model.EventId))
             {
                 TempDataMessage("message", "primary", $"Вы уже участвуете в этом мероприятии");
-                return RedirectToAction("Index", model);
+                return RedirectToAction("Index", new { id = model.EventId });
             }
             _eventService.AddNewParticipant(model, newParticipant); //или можно использовать _userService.AddNewParticipant(user, newParticipant);
             TempDataMessage("message", "success", $"Вы добавлены к списку участников мероприятия");
-            return RedirectToAction("Index", model);
+            return RedirectToAction("Index", new { id = model.EventId });
         }
 
         public void TempDataMessage(string key, string alert, string value)
