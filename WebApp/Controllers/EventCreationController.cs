@@ -39,6 +39,7 @@ namespace WebApp.Controllers
                     Date = model.Date,
                     Time = model.Time,
                     Place = model.Place,
+                    MaxParticipants = model.MaxParticipants,
                     OrganizerId = _userService.GetByFilter(i => i.Email == User.Identity.Name).UserId,
                     Contacts = model.Contacts
                 };
