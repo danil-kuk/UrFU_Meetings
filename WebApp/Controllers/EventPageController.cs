@@ -43,18 +43,13 @@ namespace WebApp.Controllers
         {
             var user = _userService.GetByFilter(u => u.Email == User.Identity.Name);
             //Постараться убрать в другое место все вспомогательные вещи
-            var newParticipant = new EventParticipant
-            {
-                Event = model,
-                User = user
-            };
             var newModel = _context.Users.Where(e => e.UserId == user.UserId).Include(c => c.SubscribedEvents).FirstOrDefault();
             if (user.SubscribedEvents.Select(e => e.EventId).Contains(model.EventId))
             {
                 TempDataMessage("message", "primary", $"Вы уже участвуете в этом мероприятии");
                 return RedirectToAction("Index", new { id = model.EventId });
             }
-            _eventService.AddNewParticipant(model, newParticipant); //или можно использовать _userService.AddNewParticipant(user, newParticipant);
+            _eventService.AddNewParticipant(model, user); //или можно использовать _userService
             TempDataMessage("message", "success", $"Вы добавлены к списку участников мероприятия");
             return RedirectToAction("Index", new { id = model.EventId });
         }
