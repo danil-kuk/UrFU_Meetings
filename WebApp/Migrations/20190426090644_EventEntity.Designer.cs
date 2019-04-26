@@ -10,7 +10,7 @@ using WebApp.Models.DataModels;
 namespace WebApp.Migrations
 {
     [DbContext(typeof(EFDBContext))]
-    [Migration("20190425155327_EventEntity")]
+    [Migration("20190426090644_EventEntity")]
     partial class EventEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,7 +59,7 @@ namespace WebApp.Migrations
                     b.Property<string>("EventName")
                         .IsRequired();
 
-                    b.Property<int>("MaxParticipants");
+                    b.Property<int?>("MaxParticipants");
 
                     b.Property<int>("OrganizerId");
 

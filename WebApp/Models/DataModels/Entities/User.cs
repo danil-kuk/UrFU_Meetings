@@ -10,7 +10,6 @@ namespace WebApp.Models.DataModels.Entities
 {
     public class User
     {
-        [Key]
         public int UserId { get; set; }
 
         [Required(ErrorMessage = "Введите имя")]

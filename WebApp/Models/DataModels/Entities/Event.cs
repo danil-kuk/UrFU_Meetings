@@ -9,7 +9,6 @@ namespace WebApp.Models.DataModels.Entities
 {
     public class Event
     {
-        [Key]
         public int EventId { get; set; }
 
         [Required(ErrorMessage = "Введите название мероприятия")]
@@ -31,11 +30,12 @@ namespace WebApp.Models.DataModels.Entities
         
         public virtual ICollection<EventParticipant> Participants { get; set; } = new HashSet<EventParticipant>();
 
+        [Required(ErrorMessage = "Укажите Id организатора мероприятия")]
         public int OrganizerId { get; set; }
 
         [Required(ErrorMessage = "Укажите свои контакты")]
         public string Contacts { get; set; }
-
-        public int MaxParticipants { get; set; }
+        
+        public int? MaxParticipants { get; set; }
     }
 }
