@@ -35,4 +35,10 @@ else
 {
     @Html.ActionLink("Участвовать", "SubscribeToEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "subscribeButton", @class = "btn btn-primary" });
 }
+@if (TempData["organizerEmail"].ToString() == User.Identity.Name)
+{
+    <br />
+    <br />
+    @Html.ActionLink("Редактировать", "RedirectToEditEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "editButton", @class = "btn btn-info" });
+}
 
