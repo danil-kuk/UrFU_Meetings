@@ -31,11 +31,20 @@ namespace WebApp.Controllers
         {
             if (_eventService.GetById(id) == null)
                 return RedirectToAction("Index", "Home");
+            
             //Постараться убрать в другое место
             var selectedEvent = _context.Events.Where(e => e.EventId == id).Include(c => c.Participants).FirstOrDefault();
             foreach (var user in selectedEvent.Participants)
                 user.User = _userService.GetById(user.UserId);
+            TempData["organizerEmail"] = _userService.GetById(selectedEvent.OrganizerId).Email;
             return View(selectedEvent);
+        }
+
+        [Authorize]
+        public IActionResult RedirectToEditEvent(Event model)
+        {
+            //Разобраться с маршрутизацией
+            return View("EditEvent", model);
         }
 
         [Authorize]
