@@ -5,7 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApp.Models;
+using WebApp.Models.DataModels;
 using WebApp.Models.DataModels.Entities;
 using WebApp.Models.ViewModels;
 using WebApp.Services;
@@ -15,25 +17,18 @@ namespace WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly IUserService _userService;
+        private readonly EFDBContext _context;
 
-        public HomeController(IUserService userService)
+        public HomeController(IUserService userService, EFDBContext context)
         {
             _userService = userService;
+            _context = context;
         }
         
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                User user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
-                if (user != null)
-                    return View(new UserProfileViewModel()
-                    {
-                        Name = user.Name,
-                        Surname = user.Surname
-                    });
-            }
-            return View();
+            var events = _context.Events.Include(c => c.Participants);
+            return View(events.ToList());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

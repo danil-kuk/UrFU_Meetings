@@ -1,0 +1,26 @@
+﻿@model WebApp.Models.DataModels.Entities.Event
+@{
+    ViewData["Title"] = Model.EventName;
+}
+
+@if (TempData["message"] != null)
+{
+    string alertType = "alert alert-" + TempData["alertType"];
+    <div class="@alertType">
+        @TempData["message"]
+    </div>
+}
+
+<h2>@Model.EventName</h2>
+<h3>@Model.Description</h3>
+<h3>@Model.Date</h3>
+<h3>@Model.Time</h3>
+<h3>@Model.Place</h3>
+<h3>Список участников: </h3>
+@foreach (var participant in Model.Participants)
+{
+    <h4>@participant.User.Name @participant.User.Surname</h4>
+}
+@Html.ActionLink("Участвовать", "SubscribeToEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "subscribeButton", @class = "btn btn-primary" })
+
+

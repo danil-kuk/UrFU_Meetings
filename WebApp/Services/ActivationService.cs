@@ -10,9 +10,9 @@ namespace WebApp.Services
 {
     public class ActivationService : IActivationService
     {
-        private readonly IUserDataBase<EmailValid> _userDataBase;
+        private readonly IDataBaseService<EmailValid> _userDataBase;
 
-        public ActivationService(IUserDataBase<EmailValid> userDataBase)
+        public ActivationService(IDataBaseService<EmailValid> userDataBase)
         {
             _userDataBase = userDataBase;
         }

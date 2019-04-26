@@ -34,8 +34,9 @@ namespace WebApp
             services.AddDbContext<EFDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped(typeof(IUserDataBase<>), typeof(UserDataBase<>));
+            services.AddScoped(typeof(IDataBaseService<>), typeof(DataBaseService<>));
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEventService, EventService>();
             services.AddScoped<IActivationService, ActivationService>();
             services.AddScoped<IPasswordResetService, PasswordResetService>();
 

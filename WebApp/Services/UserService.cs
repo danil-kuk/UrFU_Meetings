@@ -9,9 +9,9 @@ namespace WebApp.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUserDataBase<User> _databaseUser;
+        private readonly IDataBaseService<User> _databaseUser;
 
-        public UserService(IUserDataBase<User> databaseUser)
+        public UserService(IDataBaseService<User> databaseUser)
         {
             _databaseUser = databaseUser;
         }
@@ -40,9 +40,15 @@ namespace WebApp.Services
             _databaseUser.Update(user);
         }
 
+        public void AddNewParticipant(User selectedUser, EventParticipant eventParticipant)
+        {
+            selectedUser.SubscribedEvents.Add(eventParticipant);
+            UpdateUser(selectedUser);
+        }
+
         public void UpdateUserData()
         {
-            _databaseUser.UpdateUserData();
+            _databaseUser.UpdateData();
         }
     }
 }

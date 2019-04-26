@@ -21,7 +21,11 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             @Html.ActionLink("UrFU_Meetings", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <ul class="nav navbar-nav">
+                <li class="nav-item">@Html.ActionLink("Новое мероприятие", "Index", "EventCreation", new { area = "" }, new { @class = "nav-link" })</li>
+            </ul>
         </div>
+            
         <partial name="_LoginPartial" />
     </nav>
     <partial name="_CookieConsentPartial" />

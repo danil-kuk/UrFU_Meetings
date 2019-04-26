@@ -34,8 +34,8 @@ namespace WebApp.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            User user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
-            return View(new UserProfileViewModel()
+            var user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
+            return View(new UserProfileViewModel
             {
                 Name = user.Name,
                 Surname = user.Surname,
