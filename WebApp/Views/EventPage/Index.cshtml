@@ -45,7 +45,22 @@
             }
             @if (Model.Participants.Select(p => p.User.Email).Contains(User.Identity.Name))
             {
-                @Html.ActionLink("Выйти", "ExitEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "exitEventButton", @class = "btn btn-secondary" });
+                <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-secondary">Выход</button>
+                <div class="modal" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Отказ от участия в мероприятии</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Вы уверенны, что хотите отказаться от участия в этом мероприятии?</h5>
+                                <br />
+                                @Html.ActionLink("Да, я отказываюсь", "ExitEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "exitEventButton", @class = "btn btn-secondary" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
             @if (TempData["organizerEmail"].ToString() == User.Identity.Name)
             {
