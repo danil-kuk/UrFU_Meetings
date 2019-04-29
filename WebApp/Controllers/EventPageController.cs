@@ -31,7 +31,6 @@ namespace WebApp.Controllers
         {
             if (_eventService.GetById(id) == null)
                 return RedirectToAction("Index", "Home");
-            
             //Постараться убрать в другое место
             var selectedEvent = _context.Events.Where(e => e.EventId == id).Include(c => c.Participants).FirstOrDefault();
             foreach (var user in selectedEvent.Participants)
@@ -45,6 +44,23 @@ namespace WebApp.Controllers
         {
             //Разобраться с маршрутизацией
             return View("EditEvent", model);
+        }
+
+        [Authorize]
+        public IActionResult EditEvent(Event model)
+        {
+            var currentEvent = _eventService.GetById(model.EventId);
+            currentEvent.EventName = model.EventName;
+            currentEvent.Description = model.Description;
+            currentEvent.Date = model.Date;
+            currentEvent.Contacts = model.Contacts;
+            currentEvent.MaxParticipants = model.MaxParticipants;
+            currentEvent.Place = model.Place;
+            currentEvent.Time = model.Time;
+            currentEvent.EventTheme = model.EventTheme;
+            _eventService.UpdateEvent(currentEvent);
+            TempDataMessage("message", "primary", $"Информация о мероприятии изменена");
+            return RedirectToAction("Index", new { id = model.EventId });
         }
 
         [Authorize]
