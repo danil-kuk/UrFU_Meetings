@@ -48,6 +48,18 @@ namespace WebApp.Services
             UpdateEvent(selectedEvent);
         }
 
+        public void DeleteParticipant(Event selectedEvent, User userToDelete)
+        {
+            //Не работает
+            var participantToDelete = new EventParticipant
+            {
+                Event = selectedEvent,
+                User = userToDelete
+            };
+            selectedEvent.Participants.Remove(participantToDelete);
+            UpdateEvent(selectedEvent);
+        }
+
         public void UpdateEvent(Event selectedEvent)
         {
             _databaseEvent.Update(selectedEvent);
