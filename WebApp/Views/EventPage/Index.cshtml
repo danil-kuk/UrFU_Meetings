@@ -43,6 +43,10 @@
             {
                 @Html.ActionLink("Редактировать", "RedirectToEditEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "editButton", @class = "btn btn-info" });
             }
+            @if (Model.Participants.Select(p => p.User.Email).Contains(User.Identity.Name))
+            {
+                @Html.ActionLink("Выйти", "ExitEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "exitEventButton", @class = "btn btn-secondary" });
+            }
             @if (TempData["organizerEmail"].ToString() == User.Identity.Name)
             {
                 <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-danger">Удалить</button>
