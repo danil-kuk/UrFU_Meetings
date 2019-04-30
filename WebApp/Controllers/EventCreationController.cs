@@ -50,5 +50,15 @@ namespace WebApp.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+        
+        public JsonResult EventDateCheck(DateTime Date)
+        {
+            return Json(Date >= DateTime.Today && Date < DateTime.Today.AddMonths(6));
+        }
+
+        public JsonResult EventTimeCheck(DateTime Time, DateTime Date)
+        {
+            return (Date == DateTime.Today) ? Json(DateTime.Now < Time): Json(true);
+        }
     }
 }
