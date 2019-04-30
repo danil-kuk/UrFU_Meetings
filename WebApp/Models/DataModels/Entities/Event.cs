@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,9 +20,11 @@ namespace WebApp.Models.DataModels.Entities
 
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "Введите дату проведения мероприятия")]
+        [Remote("EventDateCheck", "EventCreation", ErrorMessage = "Проверьте дату мероприятия")]
         public DateTime Date { get; set; }
 
         [DataType(DataType.Time)]
+        [Remote("EventTimeCheck", "EventCreation", ErrorMessage = "Проверьте время начала мероприятия", AdditionalFields = "Date")]
         [Required(ErrorMessage = "Введите время начала мероприятия")]
         public DateTime Time { get; set; }
 
@@ -38,7 +41,8 @@ namespace WebApp.Models.DataModels.Entities
 
         [Required(ErrorMessage = "Выберите тему мероприятия")]
         public EventTheme EventTheme { get; set; }
-        
+
+        [Range(1, 50, ErrorMessage = "Количество участников должно быть от {1} до {2}")]
         public int? MaxParticipants { get; set; }
     }
 }
