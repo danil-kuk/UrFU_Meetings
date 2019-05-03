@@ -8,14 +8,21 @@
         <div class="col-lg-8 order-lg-2">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link active">Информация</a>
+                    <a href="" data-target="#myEvents" data-toggle="tab" class="nav-link active">Мои мероприятия</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Информация</a>
                 </li>
                 <li class="nav-item">
                     <a href="" data-target="#delete" data-toggle="tab" class="nav-link">Дополнительно</a>
                 </li>
             </ul>
             <div class="tab-content py-4">
-                <div class="tab-pane active" id="edit">
+                <div class="tab-pane active" id="myEvents">
+                    <h2>Мероприятия, в которых вы участвуете</h2>
+                    <partial name="_EventsTable", model="Model.SubscribedEvents.Select(s => s.Event).ToList()" />
+                </div>
+                <div class="tab-pane" id="edit">
                     @if (TempData["message"] != null)
                     {
                         string alertType = "alert alert-" + TempData["alertType"];

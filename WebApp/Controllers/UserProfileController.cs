@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using WebApp.Helpers;
 using WebApp.Models.DataModels;
@@ -23,23 +24,35 @@ namespace WebApp.Controllers
         private readonly IUserService _userService;
         private readonly IOptions<EmailSettings> _emailConfig;
         private readonly IActivationService _activationService;
+        private readonly IEventService _eventService;
+        private readonly EFDBContext _context;
 
-        public UserProfileController(IUserService userService, IOptions<EmailSettings> options, IActivationService activationService)
+        public UserProfileController(IUserService userService, 
+            IOptions<EmailSettings> options, IActivationService activationService,
+            IEventService eventService, EFDBContext context)
         {
             _userService = userService;
             _emailConfig = options;
             _activationService = activationService;
+            _context = context;
+            _eventService = eventService;
         }
 
         [Authorize]
         public IActionResult Index()
         {
             var user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
+            _context.Users.Include(c => c.SubscribedEvents).ToList();
+            foreach (var participant in user.SubscribedEvents)
+            {
+                participant.Event = _eventService.GetById(participant.EventId);
+            }
             return View(new UserProfileViewModel
             {
                 Name = user.Name,
                 Surname = user.Surname,
-                Email = user.Email
+                Email = user.Email,
+                SubscribedEvents = user.SubscribedEvents
             });
         }
 
