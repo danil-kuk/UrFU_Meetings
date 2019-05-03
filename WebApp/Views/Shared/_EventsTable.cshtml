@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WebApp.Models.DataModels.Entities.Event>
+<table class="table">
+    <tr>
+        <th>
+            Название мероприятия
+        </th>
+        <th>
+            Тема
+        </th>
+        <th>
+            Дата проведения
+        </th>
+        <th>
+            Кол-во участников
+        </th>
+        <th>
+            Страница мероприятия
+        </th>
+    </tr>
+
+    @foreach (var item in Model.OrderBy(i => i.Date))
+    {
+        //if (item.Date < DateTime.Today || (item.Date == DateTime.Today && item.Time < DateTime.Now))
+        //{
+        //    continue;
+        //} Позволяет скрывать прошедшие мероприятия
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventTheme)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @item.Participants.Count
+                @if (item.MaxParticipants > 0)
+                {
+                    <text> / @item.MaxParticipants</text>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Подробнее", "Index", "EventPage", new { id = item.EventId })
+            </td>
+        </tr>
+    }
+</table>

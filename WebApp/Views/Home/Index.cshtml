@@ -5,47 +5,4 @@
 
 <h2>Все мероприятия</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            Название
-        </th>
-        <th>
-            Тема
-        </th>
-        <th>
-            Дата проведения
-        </th>
-        <th>
-            Кол-во участников
-        </th>
-        <th>
-            Страница мероприятия
-        </th>
-    </tr>
-
-    @foreach (var item in Model.OrderBy(i => i.Date))
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EventName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EventTheme)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @item.Participants.Count
-            @if (item.MaxParticipants > 0)
-            {
-                <text> / @item.MaxParticipants</text>
-            }
-        </td>
-        <td>
-            @Html.ActionLink("Подробнее", "Index", "EventPage", new { id = item.EventId })
-        </td>
-    </tr>
-    }
-</table>
+<partial name="_EventsTable" />
