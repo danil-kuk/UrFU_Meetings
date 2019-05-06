@@ -80,6 +80,8 @@ namespace WebApp
             {
                 routes.MapRoute("EventPage", "Event/{id?}", new { controller = "EventPage", action = "Index" });
 
+                routes.MapRoute("EventEditor", "Event/{id?}/Edit", new { controller = "EventPage", action = "RedirectToEditEvent" });
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

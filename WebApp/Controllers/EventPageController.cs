@@ -45,10 +45,13 @@ namespace WebApp.Controllers
         }
 
         [Authorize]
-        public IActionResult RedirectToEditEvent(Event model)
+        public IActionResult RedirectToEditEvent(int id)
         {
-            //Разобраться с маршрутизацией
-            return View("EditEvent", model);
+            var selectedEvent = _eventService.GetById(id);
+            var currentUserId = _userService.GetByFilter(u => u.Email == User.Identity.Name).UserId;
+            if (selectedEvent == null || currentUserId != selectedEvent.OrganizerId)
+                return RedirectToAction("Index", "Home");
+            return View("EditEvent", selectedEvent);
         }
 
         [Authorize]
