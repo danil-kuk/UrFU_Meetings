@@ -17,7 +17,7 @@ namespace WebApp.Models.DataModels.Entities
 
         [Required(ErrorMessage = "Введите описание мероприятия")]
         public string Description { get; set; }
-
+        
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "Введите дату проведения мероприятия")]
         [Remote("EventDateCheck", "EventCreation", ErrorMessage = "Проверьте дату мероприятия")]

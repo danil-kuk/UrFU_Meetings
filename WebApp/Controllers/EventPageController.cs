@@ -38,7 +38,9 @@ namespace WebApp.Controllers
             {
                 user.User = _userService.GetById(user.UserId);
             }
-            TempData["organizerEmail"] = _userService.GetById(selectedEvent.OrganizerId).Email;
+            var organizer = _userService.GetById(selectedEvent.OrganizerId);
+            TempData["organizerEmail"] = organizer.Email;
+            TempData["organizerName"] = organizer.Name + " " + organizer.Surname;
             return View(selectedEvent);
         }
 
@@ -55,11 +57,13 @@ namespace WebApp.Controllers
             var currentEvent = _eventService.GetById(model.EventId);
             currentEvent.EventName = model.EventName;
             currentEvent.Description = model.Description;
-            currentEvent.Date = model.Date;
+            if (model.Date != default(DateTime))
+                currentEvent.Date = model.Date;
             currentEvent.Contacts = model.Contacts;
             currentEvent.MaxParticipants = model.MaxParticipants;
             currentEvent.Place = model.Place;
-            currentEvent.Time = model.Time;
+            if (model.Time != default(DateTime))
+                currentEvent.Time = model.Time;
             currentEvent.EventTheme = model.EventTheme;
             _eventService.UpdateEvent(currentEvent);
             TempDataMessage("message", "primary", $"Информация о мероприятии изменена");
