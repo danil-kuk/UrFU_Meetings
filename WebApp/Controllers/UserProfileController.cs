@@ -60,6 +60,7 @@ namespace WebApp.Controllers
         public IActionResult DeleteUser(UserProfileViewModel model)
         {
             User user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
+            _eventService.DeleteAllUserEvents(user);
             _userService.DeleteUser(user);
             ForceLogout();
             return RedirectToAction("Index", "Home");
