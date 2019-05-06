@@ -36,18 +36,22 @@
             {
                 <h4 class="text-primary">Максимальное количество участников</h4>
             }
-            else
+            @if (Model.Participants.Select(p => p.User.Email).Contains(User.Identity.Name))
+            {
+                <h5 class="text-success">Вы участвуете в этом мероприятии</h5>
+            }
+            @if (Model.MaxParticipants < Model.Participants.Count || !Model.Participants.Select(p => p.User.Email).Contains(User.Identity.Name))
             {
                 @Html.ActionLink("Участвовать", "SubscribeToEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "subscribeButton", @class = "btn btn-primary" });
             }
             @if (TempData["organizerEmail"].ToString() == User.Identity.Name)
             {
-                @Html.ActionLink("Редактировать", "RedirectToEditEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "editButton", @class = "btn btn-info" });
+                @Html.ActionLink("Редактировать", "RedirectToEditEvent", "EventPage", routeValues: new { id = Model.EventId }, htmlAttributes: new { id = "editButton", @class = "btn btn-info" });
             }
             @if (Model.Participants.Select(p => p.User.Email).Contains(User.Identity.Name))
             {
-                <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-secondary">Выход</button>
-                <div class="modal" id="myModal">
+                <button type="button" data-toggle="modal" data-target="#exitEventModal" class="btn btn-secondary">Выход</button>
+                <div class="modal" id="exitEventModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -65,8 +69,8 @@
             }
             @if (TempData["organizerEmail"].ToString() == User.Identity.Name)
             {
-                <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-danger">Удалить</button>
-                <div class="modal" id="myModal">
+                <button type="button" data-toggle="modal" data-target="#deleteEventModal" class="btn btn-danger">Удалить</button>
+                <div class="modal" id="deleteEventModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
