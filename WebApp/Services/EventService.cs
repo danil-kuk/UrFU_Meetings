@@ -64,5 +64,14 @@ namespace WebApp.Services
         {
             _databaseEvent.Update(selectedEvent);
         }
+
+        public void DeleteAllUserEvents(User selectedUser)
+        {
+            var userEvents = _databaseEvent.GetListByFilter(e => e.OrganizerId == selectedUser.UserId);
+            foreach (var e in userEvents)
+            {
+                DeleteEvent(e);
+            }
+        }
     }
 }

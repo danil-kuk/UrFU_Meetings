@@ -16,5 +16,6 @@ namespace WebApp.Services.Interfaces
         void DeleteEvent(Event selectedEvent);
         void AddNewParticipant(Event selectedEvent, User userToAdd);
         void DeleteParticipant(Event selectedEvent, User userToDelete);
+        void DeleteAllUserEvents(User selectedUser);
     }
 }
