@@ -13,8 +13,18 @@
                 @Html.ValidationSummary(true, "Не удалось изменить мероприятие, попробуйте снова")
                 <div class="row">
                     <partial name="_EventEditor" />
-                    <div class="col-lg">
-                        <input type="submit" value="Изменить мероприятие" class="submit-button" />
+                    <div class="col-lg d-flex align-items-center justify-content-center">
+                        <table>
+                            <tr>
+                                <td><label>Обложка мероприятия</label></td>
+                            </tr>
+                            <tr>
+                                <td><img src="~/img/cover.svg" /></td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" value="Изменить мероприятие" class="submit-button" /></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             }
