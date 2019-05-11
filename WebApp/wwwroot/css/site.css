@@ -3,6 +3,9 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
+body {
+    background: #f3f3f3;
+}
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -25,5 +28,12 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 .form-control, .btn {        
     border-radius: 3px;
+}
+form .btn:active {
+    color: #f0f0f0;
+    background: #49e0bb !important;
+}
+form .btn:hover, .btn:focus {
+    background: #41cba9;
 }
 
