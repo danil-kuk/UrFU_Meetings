@@ -3,7 +3,9 @@
     ViewData["Title"] = "EventCreation";
 }
 
-<div class="event-editor">
+<link rel="stylesheet" href="~/css/event-editor-form.css">
+
+<div class="event-editor-form">
     <form role="form" asp-action="CreateNewEvent" asp-controller="EventCreation">
         <div class="col-xs-8 col-xs-offset-4">
             <h2>Создание нового мероприятия</h2>
@@ -11,51 +13,59 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "Не удалось создать мероприятие, попробуйте снова")
-                <div class="form-group">
-                    <label>Название: </label>
-                    @Html.EditorFor(model => model.EventName, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
-                    @Html.ValidationMessageFor(model => model.EventName, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <label>Название: </label>
+                            @Html.EditorFor(model => model.EventName, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
+                            @Html.ValidationMessageFor(model => model.EventName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Описание: </label>
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @id = "eventDescription", @placeholder = "" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Тема мероприятия: </label>
+                            <select asp-for="EventTheme"
+                                    asp-items="@Html.GetEnumSelectList<WebApp.Models.DataModels.Entities.EventTheme>()">
+                                <option selected="selected" value="">Выберите тему</option>
+                            </select>
+                            <br />
+                            @Html.ValidationMessageFor(model => model.EventTheme, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="div row">
+                            <div class="form-group col-md">
+                                <label>Дата: </label>
+                                @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md">
+                                <label>Время: </label>
+                                @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Место: </label>
+                            @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Количество участников: </label>
+                            @Html.EditorFor(model => model.MaxParticipants, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MaxParticipants, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label>Контакты: </label>
+                            @Html.EditorFor(model => model.Contacts, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Contacts, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-lg">
+                        <input type="submit" value="Создать мероприятие" class="btn" />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Описание: </label>
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                    <label>Тема мероприятия: </label>
-                    <select asp-for="EventTheme"
-                            asp-items="@Html.GetEnumSelectList<WebApp.Models.DataModels.Entities.EventTheme>()">
-                        <option selected="selected" value="">Выберите тему</option>
-                    </select>
-                    <br />
-                    @Html.ValidationMessageFor(model => model.EventTheme, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                    <label>Дата: </label>
-                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                    <label>Время: </label>
-                    @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                    <label>Место: </label>
-                    @Html.EditorFor(model => model.Place, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Place, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                    <label>Количество участников: </label>
-                    @Html.EditorFor(model => model.MaxParticipants, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.MaxParticipants, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                    <label>Контакты: </label>
-                    @Html.EditorFor(model => model.Contacts, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Contacts, "", new { @class = "text-danger" })
-                </div>
-                <input type="submit" value="Создать мероприятие" class="btn btn-primary" />
             }
         </div>
     </form>

@@ -15,6 +15,7 @@ namespace WebApp.Models.DataModels.Entities
         [Required(ErrorMessage = "Введите название мероприятия")]
         public string EventName { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [Required(ErrorMessage = "Введите описание мероприятия")]
         public string Description { get; set; }
         

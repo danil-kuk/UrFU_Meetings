@@ -7,4 +7,23 @@ for details on configuring this project to bundle and minify static web assets. 
     padding-left: 15px;
     padding-right: 15px;
 }
+.btn:focus,.btn:active {
+    outline: none;
+    box-shadow: none;
+ }
+.form-control:focus,.form-control:active {
+    outline: none;
+    box-shadow: none;
+ }
+.form-control {
+    border-color: #eee;
+    min-height: 41px;
+    box-shadow: none;
+}
+.form-control:focus {
+    border-color: #5cd3b4;
+}
+.form-control, .btn {        
+    border-radius: 3px;
+}
 
