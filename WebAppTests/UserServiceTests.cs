@@ -68,7 +68,7 @@ namespace WebAppTests
 
         private User GetRandomTestUser()
         {
-            var id = random.Next(10);
+            var id = random.Next(1, 10);
             return new User
             {
                 Name = "Èìÿ" + id,
@@ -127,7 +127,7 @@ namespace WebAppTests
         [Fact]
         public void FindByIdTestUser()
         {
-            var id = random.Next(10);
+            var id = random.Next(1, 10);
             var actualUser = _userService.GetById(id);
             var expectedUser = new User
             {
@@ -170,7 +170,7 @@ namespace WebAppTests
         [Fact]
         public void UpdateTestUser()
         {
-            var rnd = random.Next(10);
+            var rnd = random.Next(1, 10);
             var newUser = new User
             {
                 Name = rnd + "Èìÿ",

@@ -62,7 +62,7 @@ namespace WebAppTests
 
         private Event GetRandomTestEvent()
         {
-            var id = random.Next(10);
+            var id = random.Next(1, 10);
             return new Event
             {
                 EventName = "TestEvent" + id,
@@ -136,7 +136,7 @@ namespace WebAppTests
         [Fact]
         public void FindByIdTestEvent()
         {
-            var id = random.Next(10);
+            var id = random.Next(1, 10);
             var actualEvent = _eventService.GetById(id);
             var expectedEvent = new Event
             {
@@ -159,6 +159,33 @@ namespace WebAppTests
             var actualEvent = _eventService.GetByFilter(e => e.EventName == expectedEvent.EventName);
 
             CheckEventData(expectedEvent, actualEvent);
+        }
+
+        [Fact]
+        public void UpdateTestEvent()
+        {
+            var rnd = random.Next(1, 10);
+            var newEvent = new Event
+            {
+                EventName = rnd + "TestEvent",
+                Description = rnd + "TestDescription",
+                EventTheme = (EventTheme)rnd,
+                Date = DateTime.Today.Date,
+                Time = DateTime.Now.AddHours(10),
+                Place = rnd + "TestPlace",
+                Contacts = rnd + "TestContacts"
+            };
+            _eventDatabaseService.Insert(newEvent);
+
+            newEvent.EventName += rnd;
+            newEvent.Description += rnd;
+            newEvent.Place += rnd;
+            newEvent.Contacts += rnd;
+            _eventService.UpdateEvent(newEvent);
+
+            var actualRes = _context.Events.Where(e => e.EventName == (rnd + testEvent.EventName + rnd)).FirstOrDefault();
+            var expectedRes = newEvent;
+            CheckEventData(expectedRes, actualRes);
         }
     }
 }
