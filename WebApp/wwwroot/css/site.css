@@ -10,30 +10,33 @@ body {
     padding-left: 15px;
     padding-right: 15px;
 }
-.btn:focus,.btn:active {
-    outline: none;
-    box-shadow: none;
- }
-.form-control:focus,.form-control:active {
-    outline: none;
-    box-shadow: none;
- }
-.form-control {
-    border-color: #eee;
-    min-height: 41px;
-    box-shadow: none;
-}
-.form-control:focus {
-    border-color: #5cd3b4;
-}
-.form-control, .btn {        
+.submit-button {
+    font-size: 16px;
+    font-weight: bold;
+    background: #5cd3b4;
+    color: #fff;
+    border: none;
+    margin-top: 20px;
+    min-width: 150px;
+    min-height: 50px;
     border-radius: 3px;
 }
-form .btn:active {
-    color: #f0f0f0;
-    background: #49e0bb !important;
+.custom-select:focus, .custom-select:active {
+    outline: none;
+    box-shadow: none;
 }
-form .btn:hover, .btn:focus {
-    background: #41cba9;
+.custom-select:focus {
+    border-color: #5cd3b4;
 }
-
+a {
+    color: #0082ff;
+}
+a:hover {
+    color: #0082ff;
+}
+.nav-link.active {
+    background-color: #f3f3f3 !important;
+}
+.nav-tabs .nav-link {
+    border-bottom: 0;
+}
