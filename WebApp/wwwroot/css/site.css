@@ -29,12 +29,6 @@ body {
 .custom-select:focus {
     border-color: #5cd3b4;
 }
-a {
-    color: #0082ff;
-}
-a:hover {
-    color: #0082ff;
-}
 .nav-link.active {
     background-color: #f3f3f3 !important;
 }
