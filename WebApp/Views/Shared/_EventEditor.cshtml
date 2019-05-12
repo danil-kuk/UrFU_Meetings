@@ -9,7 +9,7 @@
         </div>
         <div class="form-group col-md-4">
             <label>Тема мероприятия: </label> <br />
-            <select class="custom-select" asp-for="EventTheme"
+            <select class="custom-select" asp-for="EventTheme" id="DropdownList"
                     asp-items="@Html.GetEnumSelectList<WebApp.Models.DataModels.Entities.EventTheme>()">
                 <option selected="selected" value="">Выберите тему</option>
             </select>
