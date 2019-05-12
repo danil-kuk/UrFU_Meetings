@@ -20,9 +20,9 @@
                             </tr>
                             <tr>
                                 @{ 
-                                    TempData["eventCoverImgId"] = (int)@Model.EventTheme;
+                                    TempData["eventIconId"] = (int)@Model.EventTheme;
                                 }
-                                <td><img id="eventCover" src="~/img/cover.svg" /></td>
+                                <td><img id="eventIcon" src="~/img/eventIcons/eventIcon.svg" /></td>
                             </tr>
                             <tr>
                                 <td><input type="submit" value="Изменить мероприятие" class="submit-button" /></td>
@@ -38,6 +38,6 @@
     </form>
 </div>
 <script>
-    $("#eventCover").attr("src", "/img/cover" + @TempData["eventCoverImgId"] + ".svg");
+    $("#eventIcon").attr("src", "/img/eventIcons/eventIcon" + @TempData["eventIconId"] + ".svg");
 </script>
 
