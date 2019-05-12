@@ -7,7 +7,7 @@
 $(function () {
     $("#DropdownList").change(function () {
         var theme = $(this);
-        var coverId = theme.val();
-        $("#eventCover").attr("src", "/img/cover" + coverId + ".svg");
+        var iconId = theme.val();
+        $("#eventIcon").attr("src", "/img/eventIcons/eventIcon" + iconId + ".svg");
     })
 });
