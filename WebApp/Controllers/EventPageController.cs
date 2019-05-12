@@ -55,6 +55,7 @@ namespace WebApp.Controllers
         }
 
         [Authorize]
+        [HttpPost]
         public IActionResult EditEvent(Event model)
         {
             var currentEvent = _eventService.GetById(model.EventId);
