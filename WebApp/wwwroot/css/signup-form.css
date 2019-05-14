@@ -1,5 +1,5 @@
 .signup-form {
-    width: 550px;
+    min-width: 550px;
     margin: 0 auto;
     padding: 30px 0;
 }
