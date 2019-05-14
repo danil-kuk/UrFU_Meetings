@@ -35,3 +35,10 @@ body {
 .nav-tabs .nav-link {
     border-bottom: 0;
 }
+.progress-bar {
+    background-color: #43C1B2;
+}
+.progress {
+    height: 20px;
+    border-radius: 5px;
+}
