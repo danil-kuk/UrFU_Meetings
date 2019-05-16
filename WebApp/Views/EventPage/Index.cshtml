@@ -55,10 +55,13 @@
                                             @{
                                                 var progressBar = 100 * Model.Participants.Count / Model.MaxParticipants;
                                             }
-                                            <div class="progress-bar" role="progressbar" style="width: @progressBar%;">@Model.Participants.Count из @Model.MaxParticipants</div>
+                                            <div data-toggle="tooltip" data-placement="bottom" data-html="true"
+                                                 title="@foreach (var participant in Model.Participants)
+                                                 {<text>@participant.User.Name @participant.User.Surname</text> <br>}"
+                                                 class="progress-bar" role="progressbar" style="width: @progressBar%;">@Model.Participants.Count из @Model.MaxParticipants</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                }
+                                    }
                                 <div class="sidebar-item">
                                     <h5>Организатор: </h5>
                                     <h6>@TempData["organizerName"]</h6>
@@ -85,52 +88,52 @@
                                 <h4 class="text-primary">Максимальное количество участников</h4>
                             }
                             <div class="row button-container">
-                                    @if (Model.MaxParticipants < Model.Participants.Count || !Model.Participants.Select(p => p.User.Email).Contains(User.Identity.Name))
-                                    {
-                                        @Html.ActionLink("Участвовать", "SubscribeToEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "subscribeButton", @class = "btn btn-primary" });
-                                    }
-                                    @if (TempData["organizerEmail"].ToString() == User.Identity.Name)
-                                    {
-                                        @Html.ActionLink("Редактировать", "RedirectToEditEvent", "EventPage", routeValues: new { id = Model.EventId }, htmlAttributes: new { id = "editButton", @class = "btn btn-info" });
-                                    }
-                                    @if (Model.Participants.Select(p => p.User.Email).Contains(User.Identity.Name))
-                                    {
-                                        <button type="button" data-toggle="modal" data-target="#exitEventModal" class="btn btn-secondary">Выход</button>
-                                        <div class="modal" id="exitEventModal">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Отказ от участия в мероприятии</h4>
-                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <h5>Вы уверенны, что хотите отказаться от участия в этом мероприятии?</h5>
-                                                        <br />
-                                                        @Html.ActionLink("Да, я отказываюсь", "ExitEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "exitEventButton", @class = "btn btn-secondary" })
-                                                    </div>
+                                @if (Model.MaxParticipants < Model.Participants.Count || !Model.Participants.Select(p => p.User.Email).Contains(User.Identity.Name))
+                                {
+                                    @Html.ActionLink("Участвовать", "SubscribeToEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "subscribeButton", @class = "btn btn-primary" });
+                                }
+                                @if (TempData["organizerEmail"].ToString() == User.Identity.Name)
+                                {
+                                    @Html.ActionLink("Редактировать", "RedirectToEditEvent", "EventPage", routeValues: new { id = Model.EventId }, htmlAttributes: new { id = "editButton", @class = "btn btn-info" });
+                                }
+                                @if (Model.Participants.Select(p => p.User.Email).Contains(User.Identity.Name))
+                                {
+                                    <button type="button" data-toggle="modal" data-target="#exitEventModal" class="btn btn-secondary">Выход</button>
+                                    <div class="modal" id="exitEventModal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Отказ от участия в мероприятии</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5>Вы уверенны, что хотите отказаться от участия в этом мероприятии?</h5>
+                                                    <br />
+                                                    @Html.ActionLink("Да, я отказываюсь", "ExitEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "exitEventButton", @class = "btn btn-secondary" })
                                                 </div>
                                             </div>
                                         </div>
-                                    }
-                                    @if (TempData["organizerEmail"].ToString() == User.Identity.Name)
-                                    {
-                                        <button type="button" data-toggle="modal" data-target="#deleteEventModal" class="btn btn-danger">Удалить</button>
-                                        <div class="modal" id="deleteEventModal">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Удаление мероприятия</h4>
-                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <h5>Вы уверенны, что хотите <b>безвозвратно</b> удалить мероприятие?</h5>
-                                                        <br />
-                                                        @Html.ActionLink("Да, удалить мероприятие", "DeleteEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "deleteButton", @class = "btn btn-danger" })
-                                                    </div>
+                                    </div>
+                                }
+                                @if (TempData["organizerEmail"].ToString() == User.Identity.Name)
+                                {
+                                    <button type="button" data-toggle="modal" data-target="#deleteEventModal" class="btn btn-danger">Удалить</button>
+                                    <div class="modal" id="deleteEventModal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Удаление мероприятия</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5>Вы уверенны, что хотите <b>безвозвратно</b> удалить мероприятие?</h5>
+                                                    <br />
+                                                    @Html.ActionLink("Да, удалить мероприятие", "DeleteEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "deleteButton", @class = "btn btn-danger" })
                                                 </div>
                                             </div>
                                         </div>
-                                    }
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -139,13 +142,11 @@
         </div>
     </div>
 </div>
-
-<br />
-<h3>Список участников: </h3>
-@foreach (var participant in Model.Participants)
-{
-    <h4>@participant.User.Name @participant.User.Surname</h4>
-}
 <script>
     $("#eventIcon").attr("src", "/img/eventIcons/eventIcon" + @TempData["eventIconId"] + ".svg");
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('div[data-toggle=tooltip]').tooltip();
+    });
 </script>
