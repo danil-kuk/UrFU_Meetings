@@ -1,8 +1,4 @@
-﻿form .submit-button:focus, form .submit-button:active {
-    outline: none;
-    box-shadow: none;
-}
-.form-control:focus, .form-control:active {
+﻿.form-control:focus, .form-control:active {
     outline: none;
     box-shadow: none;
 }
@@ -14,19 +10,6 @@
 }
 .form-control:focus {
     border-color: #5cd3b4;
-}
-
-.form-control, .btn {
-    border-radius: 3px;
-}
-
-form .submit-button:hover {
-    background-color: #41cba9;
-}
-
-form .submit-button:active {
-    color: #f0f0f0;
-    background-color: #49e0bb;
 }
 form h2 {
     color: #333;
@@ -45,6 +28,7 @@ form input[type="checkbox"] {
 }
 form .form-group {
     margin-bottom: 20px;
+    padding-left: 0;
 }
 form {
     color: #333;
@@ -53,6 +37,7 @@ form {
     background: #fff;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
     padding: 30px;
+    margin-top: 30px;
 }
 form a {
     color: #5cd3b4;

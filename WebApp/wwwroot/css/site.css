@@ -14,6 +14,9 @@ body h1{
     padding-left: 15px;
     padding-right: 15px;
 }
+a {
+    font-weight: 500;
+}
 .submit-button {
     font-size: 16px;
     font-weight: bold;
@@ -26,15 +29,44 @@ body h1{
     border-radius: 3px;
     vertical-align: bottom;
 }
+.cancel-button {
+    font-size: 16px;
+    font-weight: bold;
+    background: #808080;
+    color: #fff;
+    border: none;
+    margin-top: 20px;
+    min-width: 100px;
+    min-height: 50px;
+    border-radius: 3px;
+    vertical-align: bottom;
+}
+.submit-button:hover {
+    background-color: #41cba9;
+}
+.cancel-button:hover {
+    background-color: #5f5f5f;
+}
+
+.submit-button:active {
+    color: #f0f0f0;
+    background-color: #49e0bb;
+}
+
+.cancel-button:active {
+    color: #f0f0f0;
+    background-color: #8b8b8b;
+}
+.submit-button:focus, form .submit-button:active {
+    outline: none;
+    box-shadow: none;
+}
 .custom-select:focus, .custom-select:active {
     outline: none;
     box-shadow: none;
 }
 .custom-select:focus {
     border-color: #5cd3b4;
-}
-.nav-link.active {
-    background-color: #f3f3f3 !important;
 }
 .nav-tabs .nav-link {
     border-bottom: 0;
@@ -45,4 +77,26 @@ body h1{
 .progress {
     height: 20px;
     border-radius: 5px;
+}
+.nav .material-icons {
+    font-size: 35px;
+    padding: 0;
+    vertical-align: middle;
+}
+.nav-item {
+    padding: 0;
+}
+.nav-pills .nav-link.active {
+    background: #43C1B2;
+}
+.nav-pills .nav-link {
+    color:black;
+    font-size: 20px;
+    margin: 5px;
+}
+.dropdown-item:active, .dropdown-item:hover {
+    background: #5cd3b4;
+}
+.dropdown-menu {
+    padding: 0;
 }

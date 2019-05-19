@@ -5,8 +5,9 @@
 
 <div class="event-editor-form">
     <form role="form" asp-action="CreateNewEvent" asp-controller="EventCreation">
-        <div class="col-xs-8 col-xs-offset-4">
+        <div class="col">
             <h2>Создание нового мероприятия</h2>
+        </div>
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
@@ -28,7 +29,6 @@
                     </div>
                 </div>
             }
-        </div>
     </form>
 </div>
 
