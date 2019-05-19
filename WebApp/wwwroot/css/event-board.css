@@ -48,11 +48,11 @@
     font-size: 20px;
 }
 .card-body text {
-    margin-bottom: -8px;
+    line-height: 1;
 }
 .card-body .event-day {
     margin-left: 10px;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 .card-body .event-name {
     padding-left:10px;
@@ -71,7 +71,6 @@
 
 .hvrbox {
     position: relative;
-    display: inline-block;
     overflow: hidden;
     max-width: 100%;
     height: auto;
@@ -98,7 +97,7 @@
         background: rgba(0, 0, 0, 0.6);
         color: #fff;
         padding: 15px;
-        transition: all 0.4s ease-in-out 0s;
+        transition: all 0.3s ease-in-out 0s;
     }
 
     .hvrbox:hover .hvrbox-layer_top,

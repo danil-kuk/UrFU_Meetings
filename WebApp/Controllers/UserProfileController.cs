@@ -42,6 +42,30 @@ namespace WebApp.Controllers
         public IActionResult Index()
         {
             var user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
+            return View(new UserProfileViewModel
+            {
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.Email,
+            });
+        }
+
+        [Authorize]
+        public IActionResult Settings()
+        {
+            var user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
+            return View(new UserProfileViewModel
+            {
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.Email,
+            });
+        }
+
+        [Authorize]
+        public IActionResult MyEvents()
+        {
+            var user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
             _context.Users.Include(c => c.SubscribedEvents).ToList();
             foreach (var participant in user.SubscribedEvents)
             {

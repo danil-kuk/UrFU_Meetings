@@ -1,0 +1,13 @@
+﻿.user-info-edit-form .submit-button, .cancel-button {
+    margin-right: 15px;
+    margin-top: 10px;
+}
+.user-info-edit-form .small-text {
+    margin-top: -20px;
+}
+.user-info-edit-form .buttons {
+    margin: 0;
+}
+.user-setting h5 {
+    margin: 10px 10px 10px 0;
+}
