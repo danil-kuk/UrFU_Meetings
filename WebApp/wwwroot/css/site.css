@@ -6,6 +6,10 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     background: #f3f3f3;
 }
+body h1{
+    text-align:center;
+    margin: 10px;
+}
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
