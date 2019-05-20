@@ -4,7 +4,7 @@
 }
 
 <h1>Мои мероприятия</h1>
-<ul class="nav nav-pills justify-content-center">
+<ul class="nav nav-pills justify-content-center" id="myPills">
     <li class="nav-item">
         <a class="nav-link active" data-toggle="pill" href="#participateEvents">Участник</a>
     </li>
@@ -12,10 +12,15 @@
         <a class="nav-link" data-toggle="pill" href="#organizedEvents">Организатор</a>
     </li>
 </ul>
-<div class="row justify-content-center">
-    <div class="hideOldEvents">
-        <label>Показывать прошедшие мероприятия?</label>
-        <input type="checkbox" id="showOldEvents" />
+<div class="col d-flex flex-column">
+    <div class="row justify-content-center sort-links">
+        <label>Сортировать по: </label>
+        <a asp-action="MyEvents" asp-route-sortOrder="@ViewData["DateSortParm"]">Дате</a>
+        <a asp-action="MyEvents" asp-route-sortOrder="@ViewData["PartisipantsSortParm"]">Участникам</a>
+    </div>
+    <div class="custom-control custom-checkbox d-flex justify-content-center">
+        <input type="checkbox" class="custom-control-input" id="showOldEvents">
+        <label class="custom-control-label" for="showOldEvents">Показать прошлые мероприятия</label>
     </div>
 </div>
 <div class="tab-content justify-content-center">
@@ -26,5 +31,4 @@
         <partial name="_EventsBoard" , model="Model.SubscribedEvents.Select(s => s.Event).Where(e => e.OrganizerId == Model.UserId).ToList()" />
     </div>
 </div>
-
 

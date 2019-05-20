@@ -5,7 +5,7 @@
 
 <div class="event-board">
     <div class="row d-flex justify-content-center">
-        @foreach (var item in Model.OrderBy(i => i.Date))
+        @foreach (var item in Model)
         {
             var skipClass = "";
             var displayStyle = "";
