@@ -39,7 +39,29 @@ namespace WebApp.Controllers
         }
 
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string sortOrder)
+        {
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "date_desc" : "";
+            ViewData["PartisipantsSortParm"] = sortOrder == "Partisipants" ? "part_desc" : "Partisipants";
+            var events = _context.Events.Include(c => c.Participants);
+            var sortedList = events.OrderBy(s => s.Date);
+            switch (sortOrder)
+            {
+                case "part_desc":
+                    sortedList = events.OrderByDescending(s => s.Participants.Count);
+                    break;
+                case "Partisipants":
+                    sortedList = events.OrderBy(s => s.Participants.Count);
+                    break;
+                case "date_desc":
+                    sortedList = events.OrderByDescending(s => s.Date);
+                    break;
+            }
+            return View("MyEvents", await sortedList.AsNoTracking().ToListAsync());
+        }
+
+        [Authorize]
+        public IActionResult ChangeAccountData()
         {
             var user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
             return View(new UserProfileViewModel
@@ -63,7 +85,7 @@ namespace WebApp.Controllers
         }
 
         [Authorize]
-        public IActionResult MyEvents()
+        public IActionResult MyEvents(string sortOrder)
         {
             var user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
             _context.Users.Include(c => c.SubscribedEvents).ToList();
@@ -71,13 +93,29 @@ namespace WebApp.Controllers
             {
                 participant.Event = _eventService.GetById(participant.EventId);
             }
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "date_desc" : "";
+            ViewData["PartisipantsSortParm"] = sortOrder == "Partisipants" ? "part_desc" : "Partisipants";
+            var events = user.SubscribedEvents;
+            var sortedList = events.OrderBy(s => s.Event.Date);
+            switch (sortOrder)
+            {
+                case "part_desc":
+                    sortedList = events.OrderByDescending(s => s.Event.Participants.Count);
+                    break;
+                case "Partisipants":
+                    sortedList = events.OrderBy(s => s.Event.Participants.Count);
+                    break;
+                case "date_desc":
+                    sortedList = events.OrderByDescending(s => s.Event.Date);
+                    break;
+            }
             return View(new UserProfileViewModel
             {
                 Name = user.Name,
                 Surname = user.Surname,
                 Email = user.Email,
                 UserId = user.UserId,
-                SubscribedEvents = user.SubscribedEvents
+                SubscribedEvents = sortedList.ToList()
             });
         }
 

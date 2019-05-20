@@ -24,11 +24,26 @@ namespace WebApp.Controllers
             _userService = userService;
             _context = context;
         }
-        
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index(string sortOrder)
         {
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "date_desc" : "";
+            ViewData["PartisipantsSortParm"] = sortOrder == "Partisipants" ? "part_desc" : "Partisipants";
             var events = _context.Events.Include(c => c.Participants);
-            return View(events.ToList());
+            var sortedList = events.OrderBy(s => s.Date);
+            switch (sortOrder)
+            {
+                case "part_desc":
+                    sortedList = events.OrderByDescending(s => s.Participants.Count);
+                    break;
+                case "Partisipants":
+                    sortedList = events.OrderBy(s => s.Participants.Count);
+                    break;
+                case "date_desc":
+                    sortedList = events.OrderByDescending(s => s.Date);
+                    break;
+            }
+            return View(await sortedList.AsNoTracking().ToListAsync());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

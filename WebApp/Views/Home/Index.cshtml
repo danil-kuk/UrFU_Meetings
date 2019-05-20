@@ -4,10 +4,15 @@
 }
 
 <h1>Доска мероприятий</h1>
-<div class="row justify-content-center">
-    <div class="hideOldEvents">
-        <label>Показывать прошедшие мероприятия?</label>
-        <input type="checkbox" id="showOldEvents" />
+<div class="col d-flex flex-column">
+    <div class="row justify-content-center sort-links">
+        <label>Сортировать по: </label>
+        <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">По дате</a>
+        <a asp-action="Index" asp-route-sortOrder="@ViewData["PartisipantsSortParm"]">По кол-ву участников</a>
+    </div>
+    <div class="custom-control custom-checkbox d-flex justify-content-center">
+        <input type="checkbox" class="custom-control-input" id="showOldEvents">
+        <label class="custom-control-label" for="showOldEvents">Показать прошлые мероприятия</label>
     </div>
 </div>
 <partial name="_EventsBoard" />

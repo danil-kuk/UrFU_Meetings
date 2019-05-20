@@ -79,10 +79,13 @@
 .skip {
     opacity: 0.7;
 }
+.sort-links a{
+    margin-left: 10px;
+}
 
-    .hvrbox img {
-        max-width: 100%;
-    }
+.hvrbox img {
+    max-width: 100%;
+}
 
     .hvrbox .hvrbox-layer_bottom {
         display: block;
