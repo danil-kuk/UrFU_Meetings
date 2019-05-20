@@ -11,3 +11,18 @@ $(function () {
         $("#eventIcon").attr("src", "/img/eventIcons/eventIcon" + iconId + ".svg");
     })
 });
+
+//Скрывать старые мероприятия на доске
+$(function () {
+    $("#showOldEvents").click(function () {
+        var eventsToSkip = document.getElementsByClassName('skip');
+        for (var i = 0, length = eventsToSkip.length; i < length; i++) {
+        if ($(this).is(":checked")) {
+            eventsToSkip[i].style.display = '';
+        }
+        else {
+            eventsToSkip[i].style.display = 'none';
+            }
+        }
+    });
+});

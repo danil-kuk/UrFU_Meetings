@@ -1,15 +1,21 @@
 ﻿@model IEnumerable<WebApp.Models.DataModels.Entities.Event>
+@{
+    Layout = null;
+}
 
 <div class="event-board">
     <div class="row d-flex justify-content-center">
         @foreach (var item in Model.OrderBy(i => i.Date))
         {
-            //if (item.Date < DateTime.Today || (item.Date == DateTime.Today && item.Time < DateTime.Now))
-            //{
-            //    continue;
-            //} Позволяет скрывать прошедшие мероприятия
-            <div class="card col-md-3">
-                <a href="Event/@item.EventId">
+            var skipClass = "";
+            var displayStyle = "";
+            if (item.Date < DateTime.Today || (item.Date == DateTime.Today && item.Time < DateTime.Now))
+            {
+                skipClass = "skip";
+                displayStyle = "none";
+            }
+            <div class="card col-md-3 @skipClass" style="display: @displayStyle">
+                <a href="/Event/@item.EventId">
                     <div class="hvrbox">
                         <img class="card-img-top hvrbox-layer_bottom" src="https://cdn.wimmel-napkins.com/F/1/MK/gMK-87510.jpg" alt="Card image cap">
                         <div class="icon-holder">
