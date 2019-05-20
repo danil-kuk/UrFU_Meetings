@@ -25,7 +25,7 @@ namespace WebApp.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string sortOrder)
+        public IActionResult Index(string sortOrder)
         {
             ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "date_desc" : "";
             ViewData["PartisipantsSortParm"] = sortOrder == "Partisipants" ? "part_desc" : "Partisipants";
@@ -43,7 +43,7 @@ namespace WebApp.Controllers
                     sortedList = events.OrderByDescending(s => s.Date);
                     break;
             }
-            return View(await sortedList.AsNoTracking().ToListAsync());
+            return View(sortedList.ToList());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -39,25 +39,9 @@ namespace WebApp.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Index(string sortOrder)
+        public IActionResult Index()
         {
-            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "date_desc" : "";
-            ViewData["PartisipantsSortParm"] = sortOrder == "Partisipants" ? "part_desc" : "Partisipants";
-            var events = _context.Events.Include(c => c.Participants);
-            var sortedList = events.OrderBy(s => s.Date);
-            switch (sortOrder)
-            {
-                case "part_desc":
-                    sortedList = events.OrderByDescending(s => s.Participants.Count);
-                    break;
-                case "Partisipants":
-                    sortedList = events.OrderBy(s => s.Participants.Count);
-                    break;
-                case "date_desc":
-                    sortedList = events.OrderByDescending(s => s.Date);
-                    break;
-            }
-            return View("MyEvents", await sortedList.AsNoTracking().ToListAsync());
+            return View();
         }
 
         [Authorize]
