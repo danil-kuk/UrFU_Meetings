@@ -4,7 +4,6 @@
 }
 
 <h1>Мои мероприятия</h1>
-
 <ul class="nav nav-pills justify-content-center">
     <li class="nav-item">
         <a class="nav-link active" data-toggle="pill" href="#participateEvents">Участник</a>
@@ -13,17 +12,18 @@
         <a class="nav-link" data-toggle="pill" href="#organizedEvents">Организатор</a>
     </li>
 </ul>
-
+<div class="row justify-content-center">
+    <div class="hideOldEvents">
+        <label>Показывать прошедшие мероприятия?</label>
+        <input type="checkbox" id="showOldEvents" />
+    </div>
+</div>
 <div class="tab-content justify-content-center">
     <div class="tab-pane container active" id="participateEvents">
-        <div class="row justify-content-center">
-            <partial name="_EventsBoard" , model="Model.SubscribedEvents.Select(s => s.Event).ToList()" />
-        </div>
+        <partial name="_EventsBoard" , model="Model.SubscribedEvents.Select(s => s.Event).Where(e => e.OrganizerId != Model.UserId).ToList()" />
     </div>
     <div class="tab-pane container fade" id="organizedEvents">
-        <div class="row justify-content-center">
-            <h4>На данный момент функция недоступна</h4>
-        </div>
+        <partial name="_EventsBoard" , model="Model.SubscribedEvents.Select(s => s.Event).Where(e => e.OrganizerId == Model.UserId).ToList()" />
     </div>
 </div>
 

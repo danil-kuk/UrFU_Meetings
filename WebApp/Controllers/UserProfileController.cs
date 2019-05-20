@@ -76,6 +76,7 @@ namespace WebApp.Controllers
                 Name = user.Name,
                 Surname = user.Surname,
                 Email = user.Email,
+                UserId = user.UserId,
                 SubscribedEvents = user.SubscribedEvents
             });
         }

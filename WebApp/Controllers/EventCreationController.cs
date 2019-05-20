@@ -33,6 +33,7 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                var organiser = _userService.GetByFilter(i => i.Email == User.Identity.Name);
                 Event newEvent = new Event
                 {
                     EventName = char.ToUpper(model.EventName[0]) + model.EventName.Substring(1).ToLower(),
@@ -42,10 +43,11 @@ namespace WebApp.Controllers
                     Place = model.Place,
                     EventTheme = model.EventTheme,
                     MaxParticipants = model.MaxParticipants,
-                    OrganizerId = _userService.GetByFilter(i => i.Email == User.Identity.Name).UserId,
+                    OrganizerId = organiser.UserId,
                     Contacts = model.Contacts
                 };
                 _eventService.InsertEvent(newEvent);
+                _eventService.AddNewParticipant(newEvent, organiser);
                 return RedirectToAction("Index", "EventPage", new { id = newEvent.EventId });
             }
             return RedirectToAction("Index", "Home");
