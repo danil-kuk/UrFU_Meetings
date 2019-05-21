@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
+@using WebApp.Models.DataModels.Entities
 <h1>Доска мероприятий</h1>
 <div class="col d-flex flex-column">
     <div class="row justify-content-center sort-links">
@@ -13,6 +13,19 @@
     <div class="custom-control custom-checkbox d-flex justify-content-center">
         <input type="checkbox" class="custom-control-input" id="showOldEvents">
         <label class="custom-control-label" for="showOldEvents">Показать прошлые мероприятия</label>
+    </div>
+    <div class="row justify-content-center showOnly">
+        <label>Оставить только: </label>
+    </div>
+    <div class="row justify-content-center eventThemesRow">
+        @foreach (var theme in Enum.GetValues(typeof(EventTheme)))
+        {
+            var checkBoxId = "showTheme" + (int)theme;
+            <div class="custom-control custom-checkbox d-flex justify-content-center">
+                <input type="checkbox" checked class="custom-control-input" id="@checkBoxId">
+                <label class="custom-control-label" for="@checkBoxId">@theme</label>
+            </div>
+        }
     </div>
 </div>
 <partial name="_EventsBoard" />

@@ -39,3 +39,204 @@ $(document).ready(function () {
     }
 });
 
+
+//Ниже для каждой темы идут скрипты, которые позволяют фильтровать события по темам на доске мероприятий
+$(function () {
+    $("#showTheme0").click(function () {
+        var eventsToShow = document.getElementsByClassName('theme0');
+        for (var i = 0, length = eventsToShow.length; i < length; i++) {
+            
+            if ($(this).is(":checked")) {
+                if (eventsToShow[i].className.split(" ")[0] == "skip" && !$("#showOldEvents").is(":checked")) {
+                    eventsToShow[i].style.display = 'none';
+                }
+                else {
+                    eventsToShow[i].style.display = '';
+                }
+            }
+            else {
+                eventsToShow[i].style.display = 'none';
+            }
+        }
+    });
+});
+
+$(function () {
+    $("#showTheme1").click(function () {
+        var eventsToShow = document.getElementsByClassName('theme1');
+        for (var i = 0, length = eventsToShow.length; i < length; i++) {
+
+            if ($(this).is(":checked")) {
+                if (eventsToShow[i].className.split(" ")[0] == "skip" && !$("#showOldEvents").is(":checked")) {
+                    eventsToShow[i].style.display = 'none';
+                }
+                else {
+                    eventsToShow[i].style.display = '';
+                }
+            }
+            else {
+                eventsToShow[i].style.display = 'none';
+            }
+        }
+    });
+});
+
+$(function () {
+    $("#showTheme2").click(function () {
+        var eventsToShow = document.getElementsByClassName('theme2');
+        for (var i = 0, length = eventsToShow.length; i < length; i++) {
+
+            if ($(this).is(":checked")) {
+                if (eventsToShow[i].className.split(" ")[0] == "skip" && !$("#showOldEvents").is(":checked")) {
+                    eventsToShow[i].style.display = 'none';
+                }
+                else {
+                    eventsToShow[i].style.display = '';
+                }
+            }
+            else {
+                eventsToShow[i].style.display = 'none';
+            }
+        }
+    });
+});
+
+$(function () {
+    $("#showTheme3").click(function () {
+        var eventsToShow = document.getElementsByClassName('theme3');
+        for (var i = 0, length = eventsToShow.length; i < length; i++) {
+
+            if ($(this).is(":checked")) {
+                if (eventsToShow[i].className.split(" ")[0] == "skip" && !$("#showOldEvents").is(":checked")) {
+                    eventsToShow[i].style.display = 'none';
+                }
+                else {
+                    eventsToShow[i].style.display = '';
+                }
+            }
+            else {
+                eventsToShow[i].style.display = 'none';
+            }
+        }
+    });
+});
+
+$(function () {
+    $("#showTheme4").click(function () {
+        var eventsToShow = document.getElementsByClassName('theme4');
+        for (var i = 0, length = eventsToShow.length; i < length; i++) {
+
+            if ($(this).is(":checked")) {
+                if (eventsToShow[i].className.split(" ")[0] == "skip" && !$("#showOldEvents").is(":checked")) {
+                    eventsToShow[i].style.display = 'none';
+                }
+                else {
+                    eventsToShow[i].style.display = '';
+                }
+            }
+            else {
+                eventsToShow[i].style.display = 'none';
+            }
+        }
+    });
+});
+
+$(function () {
+    $("#showTheme5").click(function () {
+        var eventsToShow = document.getElementsByClassName('theme5');
+        for (var i = 0, length = eventsToShow.length; i < length; i++) {
+
+            if ($(this).is(":checked")) {
+                if (eventsToShow[i].className.split(" ")[0] == "skip" && !$("#showOldEvents").is(":checked")) {
+                    eventsToShow[i].style.display = 'none';
+                }
+                else {
+                    eventsToShow[i].style.display = '';
+                }
+            }
+            else {
+                eventsToShow[i].style.display = 'none';
+            }
+        }
+    });
+});
+
+$(function () {
+    $("#showTheme6").click(function () {
+        var eventsToShow = document.getElementsByClassName('theme6');
+        for (var i = 0, length = eventsToShow.length; i < length; i++) {
+
+            if ($(this).is(":checked")) {
+                if (eventsToShow[i].className.split(" ")[0] == "skip" && !$("#showOldEvents").is(":checked")) {
+                    eventsToShow[i].style.display = 'none';
+                }
+                else {
+                    eventsToShow[i].style.display = '';
+                }
+            }
+            else {
+                eventsToShow[i].style.display = 'none';
+            }
+        }
+    });
+});
+
+$(function () {
+    $("#showTheme7").click(function () {
+        var eventsToShow = document.getElementsByClassName('theme7');
+        for (var i = 0, length = eventsToShow.length; i < length; i++) {
+
+            if ($(this).is(":checked")) {
+                if (eventsToShow[i].className.split(" ")[0] == "skip" && !$("#showOldEvents").is(":checked")) {
+                    eventsToShow[i].style.display = 'none';
+                }
+                else {
+                    eventsToShow[i].style.display = '';
+                }
+            }
+            else {
+                eventsToShow[i].style.display = 'none';
+            }
+        }
+    });
+});
+
+$(function () {
+    $("#showTheme8").click(function () {
+        var eventsToShow = document.getElementsByClassName('theme8');
+        for (var i = 0, length = eventsToShow.length; i < length; i++) {
+
+            if ($(this).is(":checked")) {
+                if (eventsToShow[i].className.split(" ")[0] == "skip" && !$("#showOldEvents").is(":checked")) {
+                    eventsToShow[i].style.display = 'none';
+                }
+                else {
+                    eventsToShow[i].style.display = '';
+                }
+            }
+            else {
+                eventsToShow[i].style.display = 'none';
+            }
+        }
+    });
+});
+
+$(function () {
+    $("#showTheme9").click(function () {
+        var eventsToShow = document.getElementsByClassName('theme9');
+        for (var i = 0, length = eventsToShow.length; i < length; i++) {
+
+            if ($(this).is(":checked")) {
+                if (eventsToShow[i].className.split(" ")[0] == "skip" && !$("#showOldEvents").is(":checked")) {
+                    eventsToShow[i].style.display = 'none';
+                }
+                else {
+                    eventsToShow[i].style.display = '';
+                }
+            }
+            else {
+                eventsToShow[i].style.display = 'none';
+            }
+        }
+    });
+});

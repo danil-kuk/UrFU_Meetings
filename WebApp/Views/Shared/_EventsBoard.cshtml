@@ -9,12 +9,13 @@
         {
             var skipClass = "";
             var displayStyle = "";
+            var themeClass = "theme" + (int)item.EventTheme;
             if (item.Date < DateTime.Today || (item.Date == DateTime.Today && item.Time < DateTime.Now))
             {
                 skipClass = "skip";
                 displayStyle = "none";
             }
-            <div class="card col-md-3 @skipClass" style="display: @displayStyle">
+            <div class="@skipClass @themeClass card col-md-3 " style="display: @displayStyle">
                 <a href="/Event/@item.EventId">
                     <div class="hvrbox">
                         <img class="card-img-top hvrbox-layer_bottom" src="https://imgholder.ru/300x150/5cd3b4/5cd3b4&text=IMAGE+HOLDER&font=ptsans" alt="">
