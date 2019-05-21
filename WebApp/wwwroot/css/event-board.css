@@ -117,3 +117,10 @@
         font-size: 18px;
         display: inline-block;
     }
+.showOnly label{
+    margin: 0;
+}
+
+.eventThemesRow .custom-control-label {
+    margin-right: 15px;
+}
