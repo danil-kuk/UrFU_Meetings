@@ -36,7 +36,7 @@ namespace WebApp.Controllers
                 var organiser = _userService.GetByFilter(i => i.Email == User.Identity.Name);
                 Event newEvent = new Event
                 {
-                    EventName = char.ToUpper(model.EventName[0]) + model.EventName.Substring(1).ToLower(),
+                    EventName = model.EventName,
                     Description = model.Description,
                     Date = model.Date,
                     Time = model.Time,
