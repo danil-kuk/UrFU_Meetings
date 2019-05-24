@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                             <div class="event-bottom">
-                                @if (Model.Date.Date < DateTime.Now.Date)
+                                @if (Model.Date.Date < DateTime.Now.Date || (Model.Date.Date == DateTime.Now.Date && Model.Time < DateTime.Now.AddHours(1)))
                                 {
                                     <h4 class="text-secondary">Мероприятие завершено</h4>
                                 }
