@@ -56,9 +56,7 @@ namespace WebApp.Controllers
             emailSender.SendEmail
                 (model.Email,
                 "Восстановление пароля",
-                $"</br><a href='https://{HttpContext.Request.Host}/Login/EnterNewPassword?key=" + 
-                HttpUtility.UrlEncode(new PasswordResetKey(_passwordResetService).ActivationKey(model.Email)) + 
-                "'><h1>Нажмите для восстановления<h1><a>"
+                $"</br><a href='https://{HttpContext.Request.Host}/Login/EnterNewPassword?key=" + HttpUtility.UrlEncode(new PasswordResetKey(_passwordResetService).ActivationKey(model.Email)) + "'><h1>Нажмите для восстановления<h1><a>"
                 );
             TempDataMessage("message", "primary", $"Инструкции по восстановлению пароля отправлены на указанную почту");
             return View("ResetPassword");
@@ -69,8 +67,7 @@ namespace WebApp.Controllers
         {
             string output = new AESEncryption().DecryptText(key);
             string[] tokens = output.Split(":OSK:");
-            PasswordReset passwordReset = _passwordResetService.GetByFilter(i => i.Email == tokens[0] &&
-            i.ActivationKey == tokens[2] && DateTime.Parse(i.Time.ToString()) == DateTime.Parse(tokens[1]));
+            PasswordReset passwordReset = _passwordResetService.GetByFilter(i => i.Email == tokens[0] && i.ActivationKey == tokens[2] && DateTime.Parse(i.Time.ToString()) == DateTime.Parse(tokens[1]));
             if (passwordReset != null)
             {
                 _passwordResetService.Delete(passwordReset);
@@ -132,12 +129,14 @@ namespace WebApp.Controllers
 
         private async Task Authenticate(string userName)
         {
+            // создаем один claim
             var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
             };
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", 
-                ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            // создаем объект ClaimsIdentity
+            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            // установка аутентификационных куки
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
