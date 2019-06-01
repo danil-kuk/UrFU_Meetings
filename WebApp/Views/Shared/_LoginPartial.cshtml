@@ -10,7 +10,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
             @Html.ActionLink("Мои мероприятия", "MyEvents", "UserProfile", routeValues: null, htmlAttributes: new { id = "myEventsLink", @class = "dropdown-item" })
-            @Html.ActionLink("Личный кабинет", "ChangeAccountData", "UserProfile", routeValues: null, htmlAttributes: new { id = "accountLink", @class = "dropdown-item" })
+            @Html.ActionLink("Об аккаунте", "ChangeAccountData", "UserProfile", routeValues: null, htmlAttributes: new { id = "accountLink", @class = "dropdown-item" })
             @Html.ActionLink("Настройки", "Settings", "UserProfile", routeValues: null, htmlAttributes: new { id = "settingsLink", @class = "dropdown-item" })
             @Html.ActionLink("Выход", "Logout", "Login", routeValues: null, htmlAttributes: new { id = "logoutLink", @class = "dropdown-item" })
         </div>
