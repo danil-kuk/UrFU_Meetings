@@ -38,6 +38,7 @@
 .event-description-content text {
     font-size: 20px;
     padding-right: 10px;
+    white-space: pre-line;
 }
 .event-header h1{
     margin: 0;
