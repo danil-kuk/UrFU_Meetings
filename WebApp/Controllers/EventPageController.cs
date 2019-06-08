@@ -75,29 +75,30 @@ namespace WebApp.Controllers
         }
 
         [Authorize]
-        public IActionResult SubscribeToEvent(Event model)
+        public IActionResult SubscribeToEvent(int EventId)
         {
             var user = _userService.GetByFilter(u => u.Email == User.Identity.Name);
             //Постараться убрать в другое место все вспомогательные вещи
             var newModel = _context.Users.Where(e => e.UserId == user.UserId)
                 .Include(c => c.SubscribedEvents).FirstOrDefault();
-            if (user.SubscribedEvents.Select(e => e.EventId).Contains(model.EventId))
+            if (user.SubscribedEvents.Select(e => e.EventId).Contains(EventId))
             {
                 TempDataMessage("message", "primary", $"Вы уже участвуете в этом мероприятии");
-                return RedirectToAction("Index", new { id = model.EventId });
+                return RedirectToAction("Index", new { id = EventId });
             }
+            var model = _eventService.GetById(EventId);
             _eventService.AddNewParticipant(model, user); //или можно использовать _userService
             TempDataMessage("message", "success", $"Вы добавлены к списку участников мероприятия");
-            return RedirectToAction("Index", new { id = model.EventId });
+            return RedirectToAction("Index", new { id = EventId });
         }
 
         [Authorize]
-        public IActionResult ExitEvent(Event model)
+        public IActionResult ExitEvent(int EventId)
         {
             var user = _userService.GetByFilter(u => u.Email == User.Identity.Name);
             //Постараться убрать всё в другое место, например в:
             //_eventService.DeleteParticipant(model, user);
-            var selectedEvent = _context.Events.Where(e => e.EventId == model.EventId)
+            var selectedEvent = _context.Events.Where(e => e.EventId == EventId)
                 .Include(c => c.Participants).FirstOrDefault();
             foreach (var participant in selectedEvent.Participants)
             {
@@ -109,12 +110,13 @@ namespace WebApp.Controllers
             }
             _context.SaveChanges();
             TempDataMessage("message", "primary", $"Вы отказались от участия в этом мероприятии");
-            return RedirectToAction("Index", new { id = model.EventId });
+            return RedirectToAction("Index", new { id = EventId });
         }
 
         [Authorize]
-        public IActionResult DeleteEvent(Event model)
+        public IActionResult DeleteEvent(int EventId)
         {
+            var model = _eventService.GetById(EventId);
             _eventService.DeleteEvent(model);
             return RedirectToAction("Index", "Home");
         }

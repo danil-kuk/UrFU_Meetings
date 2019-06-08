@@ -103,7 +103,7 @@
                                     <div class="row button-container">
                                         @if (Model.MaxParticipants < Model.Participants.Count || !Model.Participants.Select(p => p.User.Email).Contains(User.Identity.Name))
                                         {
-                                            @Html.ActionLink("Участвовать", "SubscribeToEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "subscribeButton", @class = "btn btn-primary" });
+                                            @Html.ActionLink("Участвовать", "SubscribeToEvent", "EventPage", routeValues: new { EventId = Model.EventId }, htmlAttributes: new { id = "subscribeButton", @class = "btn btn-primary" });
                                         }
                                         @if (TempData["organizerEmail"].ToString() == User.Identity.Name)
                                         {
@@ -122,7 +122,7 @@
                                                         <div class="modal-body">
                                                             <h5>Вы уверенны, что хотите отказаться от участия в этом мероприятии?</h5>
                                                             <br />
-                                                            @Html.ActionLink("Да, я отказываюсь", "ExitEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "exitEventButton", @class = "btn btn-secondary" })
+                                                            @Html.ActionLink("Да, я отказываюсь", "ExitEvent", "EventPage", routeValues: new { EventId = Model.EventId }, htmlAttributes: new { id = "exitEventButton", @class = "btn btn-secondary" })
                                                         </div>
                                                     </div>
                                                 </div>
@@ -141,7 +141,7 @@
                                                         <div class="modal-body">
                                                             <h5>Вы уверенны, что хотите <b>безвозвратно</b> удалить мероприятие?</h5>
                                                             <br />
-                                                            @Html.ActionLink("Да, удалить мероприятие", "DeleteEvent", "EventPage", routeValues: Model, htmlAttributes: new { id = "deleteButton", @class = "btn btn-danger" })
+                                                            @Html.ActionLink("Да, удалить мероприятие", "DeleteEvent", "EventPage", routeValues: new { EventId = Model.EventId }, htmlAttributes: new { id = "deleteButton", @class = "btn btn-danger" })
                                                         </div>
                                                     </div>
                                                 </div>
