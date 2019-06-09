@@ -1,0 +1,47 @@
+﻿@model WebApp.Models.ViewModels.UserProfileViewModel
+@{
+    ViewData["Title"] = "MyEvents";
+}
+@using WebApp.Models.DataModels.Entities
+<h1>Мои мероприятия</h1>
+<ul class="nav nav-pills justify-content-center" id="myPills">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="pill" href="#participateEvents">Участник</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#organizedEvents">Организатор</a>
+    </li>
+</ul>
+<div class="col d-flex flex-column">
+    <div class="row justify-content-center sort-links">
+        <label>Сортировать по: </label>
+        <a asp-action="MyEvents" asp-route-sortOrder="@ViewData["DateSortParm"]">Дате</a>
+        <a asp-action="MyEvents" asp-route-sortOrder="@ViewData["PartisipantsSortParm"]">Участникам</a>
+    </div>
+    <div class="custom-control custom-checkbox d-flex justify-content-center">
+        <input type="checkbox" class="custom-control-input" id="showOldEvents">
+        <label class="custom-control-label" for="showOldEvents">Показать прошлые мероприятия</label>
+    </div>
+    <div class="row justify-content-center showOnly">
+        <label>Оставить только: </label>
+    </div>
+    <div class="row justify-content-center eventThemesRow">
+        @foreach (var theme in Enum.GetValues(typeof(EventTheme)))
+        {
+            var checkBoxId = "showTheme" + (int)theme;
+            <div class="custom-control custom-checkbox d-flex justify-content-center">
+                <input type="checkbox" checked class="custom-control-input" id="@checkBoxId">
+                <label class="custom-control-label" for="@checkBoxId">@theme</label>
+            </div>
+        }
+    </div>
+</div>
+<div class="tab-content justify-content-center">
+    <div class="tab-pane container active" id="participateEvents">
+        <partial name="_EventsBoard" , model="Model.SubscribedEvents.Select(s => s.Event).Where(e => e.OrganizerId != Model.UserId).ToList()" />
+    </div>
+    <div class="tab-pane container fade" id="organizedEvents">
+        <partial name="_EventsBoard" , model="Model.SubscribedEvents.Select(s => s.Event).Where(e => e.OrganizerId == Model.UserId).ToList()" />
+    </div>
+</div>
+

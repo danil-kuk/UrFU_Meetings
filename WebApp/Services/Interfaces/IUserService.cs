@@ -15,5 +15,6 @@ namespace WebApp.Services
         void UpdateUserData();
         void UpdateUser(User user);
         void DeleteUser(User user);
+        void SubscribeUserToEvent(User selectedUser, Event eventToSubscribe);
     }
 }

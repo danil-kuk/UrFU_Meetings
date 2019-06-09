@@ -1,0 +1,34 @@
+﻿@model WebApp.Models.DataModels.Entities.Event
+@{
+    ViewData["Title"] = "EventCreation";
+}
+
+<div class="event-editor-form">
+    <form role="form" asp-action="CreateNewEvent" asp-controller="EventCreation">
+        <div class="col">
+            <h2>Создание нового мероприятия</h2>
+        </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "Не удалось создать мероприятие, попробуйте снова")
+                <div class="row">
+                    <partial name="_EventEditor" />
+                    <div class="col-lg d-flex align-items-center justify-content-center">
+                        <table>
+                            <tr>
+                                <td><label>Обложка мероприятия</label></td>
+                            </tr>
+                            <tr>
+                                <td><img id="eventIcon" src="~/img/eventIcons/eventIcon.svg" /></td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" value="Создать мероприятие" class="submit-button" /></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            }
+    </form>
+</div>
+

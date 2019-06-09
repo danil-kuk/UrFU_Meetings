@@ -1,0 +1,18 @@
+.event-editor-form {
+    width: 90%;
+    margin: 0 auto;
+}
+#eventDescription  {
+    height: 150px;
+}
+.event-editor-form .submit-button {
+    min-width: 250px;
+}
+form img {
+    padding-bottom: 20px;
+    max-width: 200px;
+}
+.event-editor-form td {
+    text-align: center;
+    vertical-align: middle;
+}

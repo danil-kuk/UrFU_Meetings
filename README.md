@@ -1,8 +1,9 @@
 # UrFU_Meetings
 Веб-сервис для организации небольших мероприятий студентами УрФУ
 
-## [Текущий спринт](https://trello.com/b/Idbm2f8H/second-sprint-220419) (22.04.19 - 06.05.19)  
 ### [Первый спринт](https://trello.com/b/6oacU9b5/first-sprint-300319) (30.03.19 - 12.04.19) - **Завершен**
+### [Второй спринт](https://trello.com/b/Idbm2f8H/second-sprint-220419) (22.04.19 - 12.05.19)  - **Завершен**
+### [Третий спринт](https://trello.com/b/DHtEdS7y/third-sprint-150519) (15.05.19 - 30.05.19)  - **Завершен**  
 
 Содержание
 =================
@@ -184,9 +185,9 @@ UrFU-Meetings-Db
 **Работа с Front-end и Back-End**: Visual Studio, Visual Studio Code;  
 **Back-end**: C#, ASP.NET Core, MS SQL Server;  
 **Front-end**: Razor, HTML, CSS, JavaScript;  
-**Back-end библиотеки и фреймворки**: EntityFrameworkCore, EntityFrameworkCore.Tools, EntityFrameworkCore.SqlServer, NUnit 3;  
+**Back-end библиотеки и фреймворки**: EntityFrameworkCore, EntityFrameworkCore.Tools, EntityFrameworkCore.SqlServer, xUnit;  
 **Front-end библиотеки и фреймворки**: AspNetCore.Razor.Design, Bootstrap 4, jQuery;  
-**Расширения для Visual Studio**: GitHub Extension for Visual Studio, NUnit 3 Test Adapter;  
+**Расширения для Visual Studio**: GitHub Extension for Visual Studio;  
 **Расширения для Visual Studio Code**: C# for Visual Studio Code.     
 
 Дополнительная информация

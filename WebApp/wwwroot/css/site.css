@@ -3,8 +3,100 @@ for details on configuring this project to bundle and minify static web assets. 
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
+body {
+    background: #f3f3f3;
+}
+body h1{
+    text-align:center;
+    margin: 10px;
+}
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
+a {
+    font-weight: 500;
+}
+.submit-button {
+    font-size: 16px;
+    font-weight: bold;
+    background: #5cd3b4;
+    color: #fff;
+    border: none;
+    margin-top: 20px;
+    min-width: 150px;
+    min-height: 50px;
+    border-radius: 3px;
+    vertical-align: bottom;
+}
+.cancel-button {
+    font-size: 16px;
+    font-weight: bold;
+    background: #808080;
+    color: #fff;
+    border: none;
+    margin-top: 20px;
+    min-width: 100px;
+    min-height: 50px;
+    border-radius: 3px;
+    vertical-align: bottom;
+}
+.submit-button:hover {
+    background-color: #41cba9;
+}
+.cancel-button:hover {
+    background-color: #5f5f5f;
+}
 
+.submit-button:active {
+    color: #f0f0f0;
+    background-color: #49e0bb;
+}
+
+.cancel-button:active {
+    color: #f0f0f0;
+    background-color: #8b8b8b;
+}
+.submit-button:focus, form .submit-button:active {
+    outline: none;
+    box-shadow: none;
+}
+.custom-select:focus, .custom-select:active {
+    outline: none;
+    box-shadow: none;
+}
+.custom-select:focus {
+    border-color: #5cd3b4;
+}
+.nav-tabs .nav-link {
+    border-bottom: 0;
+}
+.progress-bar {
+    background-color: #43C1B2;
+}
+.progress {
+    height: 20px;
+    border-radius: 5px;
+}
+.nav .material-icons {
+    font-size: 35px;
+    padding: 0;
+    vertical-align: middle;
+}
+.nav-item {
+    padding: 0;
+}
+.nav-pills .nav-link.active {
+    background: #43C1B2;
+}
+.nav-pills .nav-link {
+    color:black;
+    font-size: 20px;
+    margin: 5px;
+}
+.dropdown-item:active, .dropdown-item:hover {
+    background: #5cd3b4;
+}
+.dropdown-menu {
+    padding: 0;
+}

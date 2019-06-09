@@ -3,9 +3,7 @@
     ViewData["Title"] = "EmailValidExpired";
 }
 
-<link rel="stylesheet" href="~/css/signup-form.css">
-
-<div class="signup-form">
+<div class="signup-form col-md-6">
     <form role="form" asp-action="RepeatEmailActivation" asp-controller="Registration">
         @using (Html.BeginForm())
         {
@@ -19,7 +17,7 @@
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
             <h4>На почту @Model.Email будет отправлено новое письмо для подтверждения</h4>
-            <input type="submit" value="Отправить подтверждение" class="btn btn-primary" />
+            <input type="submit" value="Отправить подтверждение" class="submit-button" />
         }
     </form>
 </div>

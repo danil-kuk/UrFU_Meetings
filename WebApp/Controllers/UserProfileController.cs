@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using WebApp.Helpers;
 using WebApp.Models.DataModels;
@@ -23,23 +24,82 @@ namespace WebApp.Controllers
         private readonly IUserService _userService;
         private readonly IOptions<EmailSettings> _emailConfig;
         private readonly IActivationService _activationService;
+        private readonly IEventService _eventService;
+        private readonly EFDBContext _context;
 
-        public UserProfileController(IUserService userService, IOptions<EmailSettings> options, IActivationService activationService)
+        public UserProfileController(IUserService userService, 
+            IOptions<EmailSettings> options, IActivationService activationService,
+            IEventService eventService, EFDBContext context)
         {
             _userService = userService;
             _emailConfig = options;
             _activationService = activationService;
+            _context = context;
+            _eventService = eventService;
         }
 
         [Authorize]
         public IActionResult Index()
         {
-            User user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
-            return View(new UserProfileViewModel()
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult ChangeAccountData()
+        {
+            var user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
+            return View(new UserProfileViewModel
             {
                 Name = user.Name,
                 Surname = user.Surname,
-                Email = user.Email
+                Email = user.Email,
+            });
+        }
+
+        [Authorize]
+        public IActionResult Settings()
+        {
+            var user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
+            return View(new UserProfileViewModel
+            {
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.Email,
+            });
+        }
+
+        [Authorize]
+        public IActionResult MyEvents(string sortOrder)
+        {
+            var user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
+            _context.Users.Include(c => c.SubscribedEvents).ToList();
+            foreach (var participant in user.SubscribedEvents)
+            {
+                participant.Event = _eventService.GetById(participant.EventId);
+            }
+            ViewData["DateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "date_desc" : "";
+            ViewData["PartisipantsSortParm"] = sortOrder == "Partisipants" ? "part_desc" : "Partisipants";
+            var events = user.SubscribedEvents;
+            var sortedList = events.OrderBy(s => s.Event.Date);
+            switch (sortOrder)
+            {
+                case "part_desc":
+                    sortedList = events.OrderByDescending(s => s.Event.Participants.Count);
+                    break;
+                case "Partisipants":
+                    sortedList = events.OrderBy(s => s.Event.Participants.Count);
+                    break;
+                case "date_desc":
+                    sortedList = events.OrderByDescending(s => s.Event.Date);
+                    break;
+            }
+            return View(new UserProfileViewModel
+            {
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.Email,
+                UserId = user.UserId,
+                SubscribedEvents = sortedList.ToList()
             });
         }
 
@@ -47,6 +107,7 @@ namespace WebApp.Controllers
         public IActionResult DeleteUser(UserProfileViewModel model)
         {
             User user = _userService.GetByFilter(i => i.Email == User.Identity.Name);
+            _eventService.DeleteAllUserEvents(user);
             _userService.DeleteUser(user);
             ForceLogout();
             return RedirectToAction("Index", "Home");

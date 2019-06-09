@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApp.Models.DataModels.Entities
 {
-    public partial class User
+    public class User
     {
         public int UserId { get; set; }
 
@@ -32,5 +33,7 @@ namespace WebApp.Models.DataModels.Entities
         public string Password { get; set; }
 
         public bool EmailValid { get; set; }
+
+        public virtual ICollection<EventParticipant> SubscribedEvents { get; set; } = new HashSet<EventParticipant>();
     }
 }

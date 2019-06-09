@@ -1,0 +1,60 @@
+﻿@model WebApp.Models.ViewModels.UserProfileViewModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+@if (TempData["message"] != null)
+{
+    string alertType = "alert alert-" + TempData["alertType"];
+    <div class="@alertType">
+        @TempData["message"]
+    </div>
+}
+<div class="user-info-edit-form col-7 ml-auto mr-auto">
+    <form role="form" asp-action="ChangeUserData" asp-controller="UserProfile">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "Не удалось изменить данные, попробуйте снова")
+            <h2>Изменить данные</h2>
+            <div class="row">
+                <div class="form-group col">
+                    <label>Имя</label>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col">
+                    <label>Фамилия</label>
+                    @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
+                    @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <label>Email</label>
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="small-text">
+                <small>*При изменении почты её необходимо заново подтвердить</small>
+            </div>
+            <div class="row">
+                <div class="form-group col">
+                    <label>Изменить пароль</label>
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col">
+                    <label>Подтвердите пароль</label>
+                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="buttons form-group row">
+                <input type="reset" class="cancel-button" value="Отмена">
+                <input type="submit" class="submit-button" value="Сохранить изменения">
+            </div>
+        }
+    </form>
+</div>
+

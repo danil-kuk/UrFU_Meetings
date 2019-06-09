@@ -40,6 +40,53 @@ namespace WebApp.Migrations
                     b.ToTable("EmailValid");
                 });
 
+            modelBuilder.Entity("WebApp.Models.DataModels.Entities.Event", b =>
+                {
+                    b.Property<int>("EventId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Contacts")
+                        .IsRequired();
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.Property<string>("EventName")
+                        .IsRequired();
+
+                    b.Property<string>("EventTheme")
+                        .IsRequired();
+
+                    b.Property<int?>("MaxParticipants");
+
+                    b.Property<int>("OrganizerId");
+
+                    b.Property<string>("Place")
+                        .IsRequired();
+
+                    b.Property<DateTime>("Time");
+
+                    b.HasKey("EventId");
+
+                    b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("WebApp.Models.DataModels.Entities.EventParticipant", b =>
+                {
+                    b.Property<int>("EventId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("EventId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("EventParticipant");
+                });
+
             modelBuilder.Entity("WebApp.Models.DataModels.Entities.PasswordReset", b =>
                 {
                     b.Property<int>("Id")
@@ -85,6 +132,19 @@ namespace WebApp.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("WebApp.Models.DataModels.Entities.EventParticipant", b =>
+                {
+                    b.HasOne("WebApp.Models.DataModels.Entities.Event", "Event")
+                        .WithMany("Participants")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("WebApp.Models.DataModels.Entities.User", "User")
+                        .WithMany("SubscribedEvents")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
