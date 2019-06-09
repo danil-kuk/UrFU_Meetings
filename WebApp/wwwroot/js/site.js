@@ -23,6 +23,19 @@ $(function () {
     });
 });
 
+$(document).ready(function () {
+    var eventsToSkip = document.getElementsByClassName('skip');
+    for (var i = 0, length = eventsToSkip.length; i < length; i++) {
+        if ($("#showOldEvents").is(":checked")) {
+            eventsToSkip[i].style.display = '';
+        }
+        else {
+            eventsToSkip[i].style.display = 'none';
+        }
+    }
+});
+
+
 //Возвращение на ту же вкладку после обновления страницы в разделе Мои Мероприятия
 
 $(document).ready(function () {
