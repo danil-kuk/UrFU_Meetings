@@ -96,6 +96,7 @@ a {
 }
 .dropdown-item:active, .dropdown-item:hover {
     background: #5cd3b4;
+    color: black;
 }
 .dropdown-menu {
     padding: 0;
