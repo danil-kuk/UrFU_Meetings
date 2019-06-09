@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,62 +10,18 @@
     <EmbeddedResource Remove="wwwroot\images\**" />
     <None Remove="wwwroot\images\**" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Migrations\20190412062839_EmailValid.cs" />
-    <Compile Remove="Migrations\20190412062839_EmailValid.Designer.cs" />
-    <Compile Remove="Migrations\20190412063004_EmailValidation.cs" />
-    <Compile Remove="Migrations\20190412063004_EmailValidation.Designer.cs" />
-    <Compile Remove="Migrations\20190412063526_EmailValid2.cs" />
-    <Compile Remove="Migrations\20190412063526_EmailValid2.Designer.cs" />
-    <Compile Remove="Migrations\20190412064158_EmailValid.cs" />
-    <Compile Remove="Migrations\20190412064158_EmailValid.Designer.cs" />
-    <Compile Remove="Migrations\20190412064736_EmailValid.cs" />
-    <Compile Remove="Migrations\20190412064736_EmailValid.Designer.cs" />
-    <Compile Remove="Migrations\20190412065020_EmailValid.cs" />
-    <Compile Remove="Migrations\20190412065020_EmailValid.Designer.cs" />
-    <Compile Remove="Migrations\20190412065340_UserPasswordLengthCorrection.cs" />
-    <Compile Remove="Migrations\20190412065340_UserPasswordLengthCorrection.Designer.cs" />
-    <Compile Remove="Migrations\20190412065433_UserPasswordLengthCorrection.cs" />
-    <Compile Remove="Migrations\20190412065433_UserPasswordLengthCorrection.Designer.cs" />
-    <Compile Remove="Migrations\20190423153536_EventEntity.cs" />
-    <Compile Remove="Migrations\20190423153536_EventEntity.Designer.cs" />
-    <Compile Remove="Migrations\20190423160441_EventEntity.cs" />
-    <Compile Remove="Migrations\20190423160441_EventEntity.Designer.cs" />
-    <Compile Remove="Migrations\20190424155617_EventEntity.cs" />
-    <Compile Remove="Migrations\20190424155617_EventEntity.Designer.cs" />
-    <Compile Remove="Migrations\20190424162415_EventEntity.cs" />
-    <Compile Remove="Migrations\20190424162415_EventEntity.Designer.cs" />
-    <Compile Remove="Migrations\20190424162519_EventEntity.cs" />
-    <Compile Remove="Migrations\20190424162519_EventEntity.Designer.cs" />
-    <Compile Remove="Migrations\20190424172604_EventEntity.cs" />
-    <Compile Remove="Migrations\20190424172604_EventEntity.Designer.cs" />
-    <Compile Remove="Migrations\20190425150626_EntitiesAdjustments.cs" />
-    <Compile Remove="Migrations\20190425150626_EntitiesAdjustments.Designer.cs" />
-    <Compile Remove="Migrations\20190425155327_EventEntity.cs" />
-    <Compile Remove="Migrations\20190425155327_EventEntity.Designer.cs" />
-    <Compile Remove="Migrations\20190426090624_Event-Entity.cs" />
-    <Compile Remove="Migrations\20190426090624_Event-Entity.Designer.cs" />
-    <Compile Remove="Migrations\20190426090644_EventEntity.cs" />
-    <Compile Remove="Migrations\20190426090644_EventEntity.Designer.cs" />
-    <Compile Remove="Migrations\20190426140801_EventEntity.cs" />
-    <Compile Remove="Migrations\20190426140801_EventEntity.Designer.cs" />
-    <Compile Remove="Migrations\20190426142651_EventEntity.cs" />
-    <Compile Remove="Migrations\20190426142651_EventEntity.Designer.cs" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.3.1" />
-    <PackageReference Include="jQuery" Version="3.3.1" />
+    <PackageReference Include="jQuery" Version="3.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1">
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
   <ItemGroup>
